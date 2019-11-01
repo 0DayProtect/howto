@@ -1,4 +1,4 @@
-ftp
+Ftp
 ---
 
 #Useful ftp commands to run in Linux
