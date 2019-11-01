@@ -1,4 +1,5 @@
 # howto
-system analysis
+System Analysis
+---------------
 
-Usefull commands in gathering information and testing for vulnerabilies in various enviornments and systems
+Useful commands in gathering information and testing for vulnerabilies in various enviornments and systems
