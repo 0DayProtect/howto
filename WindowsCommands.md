@@ -112,9 +112,23 @@ time /t
 
 
 
-#Windows show uptime and system information
+#Windows show uptime/system information
 C:\WINDOWS\system32>systeminfo 
 systeminfo 
+
+
+
+#Save system information for exploit gathering
+C:\WINDOWS\system32>systeminfo > systeminfo
+systeminfo 
+
+#Upload from Blue Team(Windows) to Red Team (Linux)
+
+#Red Team (Linux) checks against possible vulnerabilites 
+git clone https://github.com/GDSSecurity/Windows-Exploit-Suggester.git
+cd Windows-Exploit-Suggester
+python2.7 windows-exploit-suggester.py --update
+python2.7 windows-exploit-suggester.py --database 2019-10-27-mssb.xls --systeminfo systeminfo.txt
 
 
 
