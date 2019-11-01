@@ -1,4 +1,4 @@
-# howto
+# HOWTO
 System Analysis
 ---------------
 
