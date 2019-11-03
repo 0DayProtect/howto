@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#Alpine Linux based firefox (no plugins or security)
+#https://github.com/danielguerra69/alpine-firefox
+
+#systemctl start docker
+#docker run -p 4848:22 --name alpine-firefox --hostname alpine-firefox -d danielguerra/alpine-firefox
+#docker exec -ti alpine-firefox passwd (type new password)
+
+#docker start alpine-firefox
+#docker stop alpine-firefox
+#docker restart alpine-firefox
+
+#ssh -C -A -t -X root@localhost -p 4848
+
+#Backup and Restore alpine-firefox image
+#
+#docker save danielguerra/alpine-firefox > alpine-firefox.tar
+#docker load < alpine-firefox.tar
+#docker run -p 4848:22 --name alpine-firefox --hostname alpine-firefox -d danielguerra/alpine-firefox
+#docker start alpine-firefox
+#docker exec -it alpine-firefox busybox sh
+#passwd
+#(set root password)
+#ssh -C -A -t -X root@localhost -p 4848
+#adduser
+#(add new user)
+#ssh -C -A -t -X user@localhost -p 4848
