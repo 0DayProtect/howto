@@ -107,6 +107,56 @@ Nmap done: 1 IP address (1 host up) scanned in 74.74 seconds
 
 
 
+#Scan a specific port in detail
+nmap -A -p62696 x.x.x.x
+Starting Nmap 7.80 ( https://nmap.org ) at 2019-11-02 21:00 UTC
+Nmap scan report for hostname (x.x.x.x)
+Host is up (0.14s latency).
+
+PORT      STATE SERVICE VERSION
+62696/tcp open  http    Microsoft IIS httpd 8.5
+| http-methods: 
+|_  Potentially risky methods: TRACE
+| http-robots.txt: 1 disallowed entry 
+|_/backend
+|_http-server-header: Microsoft-IIS/8.5
+|_http-title: Site doesn't have a title (text/html).
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Device type: general purpose
+Running (JUST GUESSING): Microsoft Windows 2012|2008|7|Vista (91%)
+OS CPE: cpe:/o:microsoft:windows_server_2012 cpe:/o:microsoft:windows_server_2008:r2 cpe:/o:microsoft:windows_8 cpe:/o:microsoft:windows_7::-:professional cpe:/o:microsoft:windows_vista::- cpe:/o:microsoft:windows_vista::sp1
+Aggressive OS guesses: Microsoft Windows Server 2012 (91%), Microsoft Windows Server 2012 or Windows Server 2012 R2 (91%), Microsoft Windows Server 2012 R2 (91%), Microsoft Windows Server 2008 R2 (85%), Microsoft Windows Server 2008 R2 SP1 or Windows 8 (85%), Microsoft Windows 7 Professional or Windows 8 (85%), Microsoft Windows 7 SP1 or Windows Server 2008 SP2 or 2008 R2 SP1 (85%), Microsoft Windows Vista SP0 or SP1, Windows Server 2008 SP1, or Windows 7 (85%), Microsoft Windows Vista SP2 (85%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+TRACEROUTE (using port 62696/tcp)
+HOP RTT       ADDRESS
+1   159.54 ms x.x.x.x
+2   159.64 ms hostname (x.x.x.x)
+
+
+
+#Enumearte(scan for) windows usernames via kerberos on a domain against a list
+nmap -p 88 --script=krb5-enum-users --script-args krb5-enum-users.realm='domain.local',userdb=/usr/share/seclists/Usernames/Names/names.txt x.x.x.x
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2019-11-02 13:37 UTC
+Stats: 0:00:04 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
+NSE Timing: About 0.62% done
+
+Nmap scan report for x.x.x.x
+Host is up (0.16s latency).
+
+PORT   STATE SERVICE
+88/tcp open  kerberos-sec
+| krb5-enum-users: 
+| Discovered Kerberos principals
+|_    james@domain.local
+
+Nmap done: 1 IP address (1 host up) scanned in 346.93 seconds
+
+
+
 #LFI (Local file Include) Scan
 fimap -H -d 3 -u http://x.x.x.x -w /tmp/fimap_output
 
@@ -115,7 +165,7 @@ fimap v.1.00_svn (My life for Aiur)
 :: by Iman Karim (fimap.dev@gmail.com)
 
 Crawler is harvesting URLs from start URL: 'http://x.x.x.x' with depth: 3 and writing results to: '/tmp/fimap_output'
-[0] Going to root URL: 'http://10.10.10.8'...
+[0] Going to root URL: 'http://x.x.x.x'...
 [Done: 0 | Todo: 2 | Depth: 1] Going for next URL: 'http://x.x.x.x/'...
 [Done: 1 | Todo: 1 | Depth: 1] Going for next URL: 'http://x.x.x.x/?tpl=list&folders-filter=%5c&recursive'...
 Harvesting done.
@@ -160,12 +210,12 @@ Task Completed
 
 
 #Run a Dictonary attack against a webframework
-dirb http://x.x.x.x/ /home/RedTeam/.ZAP/fuzzers/dirbuster/directory-list-2.3-big.txt
+dirb http://x.x.x.x/ /home/RedTeam/directory-list-2.3-big.txt
 
 
 
 #Locate directories on a webframework
-dirbuster -l /home/RedTeam/.ZAP/fuzzers/dirbuster/directory-list-2.3-big.txt -u http://x.x.x.x
+dirbuster -l /home/RedTeam/directory-list-2.3-big.txt -u http://x.x.x.x
 Starting OWASP DirBuster 1.0-RC1
 Starting dir/file list based brute forcing
 Dir found: / - 200
@@ -173,3 +223,81 @@ Dir found: /search/ - 403
 Dir found: /.git/ - 403
 
 
+
+#Directory fuzz responses
+wfuzz -c -z file,/home/directory-list-2.3-big.txt --hc 404 http://x.x.x.x/FUZZ
+
+dirb http://x.x.x.x/ /home/RedTeam/directory-list-2.3-big.txt
+
+-----------------
+DIRB v2.22    
+By The Dark Raver
+-----------------
+
+START_TIME: Fri Nov  1 23:02:37 2019
+URL_BASE: http://x.x.x.x/
+WORDLIST_FILES: /home/RedTeam/directory-list-2.3-big.txt
+
+-----------------
+
+*** Generating Wordlist...
+
+
+
+#The arp command manipulates or displays the kernel's IPv4 network neighbour cache
+arp
+
+Address                  HWtype  HWaddress           Flags Mask            Iface
+_gateway                 ether   00:00:00:00:00:00   C                     enp2s4
+
+
+
+#Find shares and scan for open NETBIOS nameservers on a local or remote network
+nbtscan x.x.x.x
+Doing NBT name scan for addresses from x.x.x.x
+
+IP address       NetBIOS Name     Server    User             MAC address      
+------------------------------------------------------------------------------
+
+
+
+#Worklist bruteforce scan mssql or website on a port
+gobuster -w /home/RedTeam/directory-list-2.3-big.txt -u http://x.x.x.x:1337
+
+=====================================================
+Gobuster v2.0.1              OJ Reeves (@TheColonial)
+=====================================================
+[+] Mode         : dir
+[+] Url/Domain   : http://x.x.x.x:1337/
+[+] Threads      : 10
+[+] Wordlist     : /home/RedTeam/directory-list-2.3-big.txt
+[+] Status codes : 200,204,301,302,307,403
+[+] Timeout      : 10s
+=====================================================
+2019/11/02 13:41:13 Starting gobuster
+=====================================================
+Progress: 1549 / 1273838 (0.12%)
+
+
+#Super quick way of directory enumeration (exports directory access permissions)
+dirsearch -u http://x.x.x.x:62696 -w /home/RedTeam/directory-list-2.3-big.txt -f -e asp,aspx -x 400
+
+ _|. _ _  _  _  _ _|_    v0.3.8
+(_||| _) (/_(_|| (_| )
+
+Extensions: asp, aspx | HTTP method: get | Threads: 10 | Wordlist size: 3820283
+
+Error Log: /home/RedTeam/.dirsearch/logs/errors-19-11-02_16-04-25.log
+
+Target: http://x.x.x.x:62696
+
+[16:04:25] Starting: 
+0.04% - Last request to: 64/                    
+[16:04:25] Starting: 
+[16:04:44] 200 -   41B  - /test.asp             
+[16:04:49] 200 -   20B  - /backend/
+[16:09:14] 200 -   41B  - /Test.asp                 
+CTRL+C detected: Pausing threads, please wait...          
+[e]xit / [c]ontinue: e                    
+
+Canceled by the user
