@@ -1,0 +1,11 @@
+Linux
+----
+
+
+#Obtain strings inside of a binary
+strings tester.exe | grep SQL
+SQLSTATE: 
+DRIVER={SQL Server};SERVER=TALLY, 1433;DATABASE=orcharddb;UID=sa;PWD=GWE3V65#6KFH93@4GWTG2G;
+
+
+

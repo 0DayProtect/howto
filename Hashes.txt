@@ -58,6 +58,7 @@ hashcat -a0 -m 1000 2F635F6D20E3FDE0C53075A84B68FB07DCEC9B03 /usr/share/wordlist
 hashcat (v5.1.0) starting...
 
 
+
 #To get a hash from a decode
 base64 -d <<< NmQyNDI0NzE2YzVmNTM0MDVmNTA0MDczNzM1NzMwNzI2NDIx
 6d2424716c5f53405f504073735730726421
@@ -67,3 +68,23 @@ base64 -d <<< NmQyNDI0NzE2YzVmNTM0MDVmNTA0MDczNzM1NzMwNzI2NDIx
 #Hexadecimal conversion
 echo 6d2424716c5f53405f504073735730726421 | xxd -r -p
 m$$ql_S@_P@ssW0rd!
+
+
+#keepass extract hash
+keepass2john tim.kdbx
+tim:$keepass$*2*6000*0*f362b5565b916422607711b54e8d0bd20838f5111d33a5eed137f9d66a375efb*3f51c5ac43ad11e0096d59bb82a59dd09cfd8d2791cadbdb85ed3020d14c8fea*3f759d7011f43b30679a5ac650991caa*b45da6b5b0115c5a7fb688f8179a19a749338510dfe90aa5c2cb7ed37f992192*85ef5c9da14611ab1c1edc4f00a045840152975a4d277b3b5c4edc1cd7da5f0f
+keepass2john tim.kdbx > hash
+
+
+#john wordlist bruteforce against KeePass hash
+john --format=KeePass --wordlist=/usr/share/wordlists/rockyou.txt hash
+
+Using default input encoding: UTF-8
+Loaded 1 password hash (KeePass [SHA256 AES 32/64])
+Cost 1 (iteration count) is 6000 for all loaded hashes
+Cost 2 (version) is 2 for all loaded hashes
+Cost 3 (algorithm [0=AES, 1=TwoFish, 2=ChaCha]) is 0 for all loaded hashes
+Warning: OpenMP is disabled; a non-OpenMP build may be faster
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:00:04 0.03% (ETA: 23:30:25) 0g/s 1221p/s 1221c/s 1221C/s tigger12
+

