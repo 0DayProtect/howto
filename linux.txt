@@ -1,6 +1,8 @@
 Linux
 ----
 
+#copy over ssh (scp)
+scp -P 22 user@x.x.x.x:/home/filename .
 
 #Obtain strings inside of a binary
 strings tester.exe | grep SQL

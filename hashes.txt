@@ -88,3 +88,10 @@ Warning: OpenMP is disabled; a non-OpenMP build may be faster
 Press 'q' or Ctrl-C to abort, almost any other key for status
 0g 0:00:00:04 0.03% (ETA: 23:30:25) 0g/s 1221p/s 1221c/s 1221C/s tigger12
 
+
+
+#Once Completed the crack
+john hash --show
+CEH:moonshine1
+
+1 password hash cracked, 0 left

