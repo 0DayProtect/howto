@@ -1,0 +1,5 @@
+#Ports
+
+#Windows
+5985 - WinRM (External view while scanning)
+47001 - WinRM (Internal of network)

