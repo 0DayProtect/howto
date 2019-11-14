@@ -285,6 +285,8 @@ wfuzz -c -z range,1-10 --hc 404 http://x.x.x.x/list.asp?id=FUZZ
 wfuzz -c -z file,/home/directory-list-2.3-big.txt --hc 404 http://x.x.x.x/FUZZ
 
 #Directory fuzzing
+#After fuzzing subdomains (verify that something exists) use gobuster for enumerating http status codes and language types
+wfuzz -c -z file,/usr/share/dirbuster/directory-list-2.3-medium.txt --hc 404 -Z http://FUZZ.x.x.x.x
 wfuzz -c -w /usr/share/dirbuster/directory-list-2.3-medium.txt --hh 158607 http://x.x.x.x/FUZZ | grep 301
 000000067:   301        1 L      10 W     145 Ch      "forum"        
 000001614:   301        1 L      10 W     147 Ch      "monitor"      
@@ -303,6 +305,27 @@ WORDLIST_FILES: /home/RedTeam/directory-list-2.3-big.txt
 -----------------
 
 *** Generating Wordlist...
+
+#First find subdomains/directories (even if unviewable)
+#Then enumerate access to any paths using http status codes
+gobuster -u members.xxxxxx.com/directory -w /home/RedTeam/directory-list-2.3-big.txt -x .htm,.html,.aspx,.asp
+
+=====================================================
+Gobuster v2.0.1              OJ Reeves (@TheColonial)
+=====================================================
+[+] Mode         : dir
+[+] Url/Domain   : http://members.xxxxxx.com/directory
+[+] Threads      : 10
+[+] Wordlist     : /home/RedTeam/directory-list-2.3-big.txt
+[+] Status codes : 200,204,301,302,307,403
+[+] Extensions   : aspx,asp,htm,html
+[+] Timeout      : 10s
+=====================================================
+2019/11/14 16:30:21 Starting gobuster
+=====================================================
+/login.asp (Status: 200)
+/welcome.asp (Status: 302)
+/Login.asp (Status: 200)
 
 
 

