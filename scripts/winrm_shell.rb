@@ -13,7 +13,7 @@
 #      By running this, YOU are using this program at YOUR OWN RISK.                 
 #  This software is provided "as is", WITHOUT ANY guarantees OR warranty. 
 # ./winrm_shell.rb -h
-# ruby winrm_shell.rb -s 10.10.10.81 -d domain -u Administrator -p test1test!
+# ruby winrm_shell.rb -s x.x.x.x -d domain -u Administrator -p test1test!
 
 # Modules
 require 'winrm'
