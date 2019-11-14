@@ -1,6 +1,9 @@
 Links
 -----
 
+#hybrid-analysis
+#disassembles in details malware
+https://hybrid-analysis.com
 
 #powershell shell
 https://github.com/samratashok/nishang
@@ -10,3 +13,6 @@ https://eternallybored.org/misc/netcat/netcat-win32-1.12.zip
 
 #Random exploit
 https://github.com/SecWiki
+
+#DSInternals PowerShell Module and Framework
+https://github.com/MichaelGrafnetter/DSInternals

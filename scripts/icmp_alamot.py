@@ -6,8 +6,8 @@
 # -----------------------------------------------------------------------------
 #
 # Change the Following
-# LHOST="10.10.15.43" RedTeam (Attacker)
-# RHOST="10.10.10.57" BlueTeam (Victim)
+# LHOST="x.x.x.x" RedTeam (Attacker)
+# RHOST="x.x.x.x" BlueTeam (Victim)
 #
 # > UPLOAD local_path remote_path
 #   (to upload a file using the HTTP protocol via xcmd, "echo >>" commands and
@@ -36,8 +36,8 @@ except ImportError:
     print('You need to install Python Impacket library first')
     sys.exit(255)
 
-LHOST="10.10.15.43"
-RHOST="10.10.10.57"
+LHOST="x.x.x.x"
+RHOST="x.x.x.x"
 RPORT=62696
 BUFFER_SIZE=110
 INITIAL_UID = uuid.uuid4().hex[0:8]

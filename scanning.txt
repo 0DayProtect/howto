@@ -220,7 +220,9 @@ nikto -h http://x.x.x.x
 
 
 #Page and Directory Brueforcing
-/usr/bin/dirsearch -u x.x.x.x -e txt,html,php
+#Try different ports/services
+dirsearch -u http://x.x.x.x:8080 -e php -f -t 20
+dirsearch -u x.x.x.x -e txt,html,php
 
  _|. _ _  _  _  _ _|_    v0.3.8
 (_||| _) (/_(_|| (_| )

