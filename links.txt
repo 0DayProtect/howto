@@ -5,6 +5,9 @@ Links
 #disassembles in details malware
 https://hybrid-analysis.com
 
+#analyze data formats/encryption/compression
+https://gchq.github.io/CyberChef
+
 #powershell shell
 https://github.com/samratashok/nishang
 

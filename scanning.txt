@@ -255,7 +255,33 @@ Dir found: /.git/ - 403
 
 
 
-#Directory fuzz responses
+#Bruteforce web applications
+    Predictable credentials
+    Predictable sessions identifier (session idʼs)
+    Predictable resource location (directories and files)
+    Injections
+    Path traversals
+    Overflows
+    Cross site scripting
+    Authentication flaws
+    Insecure direct object references
+    Multiple Injection points capability with multiple dictionaries
+    Recursion (When doing directory bruteforce)
+    Post, headers and authentication data brute forcing
+    Cookies fuzzing
+    Authentication support (NTLM, Basic)
+    All parameters bruteforcing (POST and GET)
+    Multiple encoders per payload
+    Payload combinations with iterators
+    Baseline request (to filter results against)
+    Brute force HTTP methods
+    Multiple proxy support (each request through a different proxy)
+    HEAD scan (faster for resource discovery)
+    Dictionaries tailored for known applications (Weblogic, Iplanet, Tomcat, Domino, Oracle 9i, Vignette, Coldfusion and many more
+
+wfuzz -c -z -v --sc 200 -z file,/home/passwords.txt -d "username=admin&password=FUZZ" http://x.x.x.x/login.php
+wfuzz -c -v -z file,/usr/share/wfuzz/wordlist/Injections/SQL.txt --hc 404 http://x.x.x.x/index.php?id=FUZZ
+wfuzz -c -z range,1-10 --hc 404 http://x.x.x.x/list.asp?id=FUZZ
 wfuzz -c -z file,/home/directory-list-2.3-big.txt --hc 404 http://x.x.x.x/FUZZ
 
 #Directory fuzzing
@@ -297,7 +323,11 @@ IP address       NetBIOS Name     Server    User             MAC address
 
 
 
-#Worklist bruteforce scan mssql or website on a port
+#Bruteforce scan mssql or website on a port
+#Can scan by http codes
+#Can scan by framework language (asp,php,html)
+gobuster -w /home/RedTeam/directory-list-2.3-big.txt -u http://x.x.x.x:1337 -x asp
+gobuster -w /home/RedTeam/directory-list-2.3-big.txt -u http://x.x.x.x:1337 -f -s 200,204,301,302,307,403
 gobuster -w /home/RedTeam/directory-list-2.3-big.txt -u http://x.x.x.x:1337
 
 =====================================================
