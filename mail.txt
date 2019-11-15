@@ -1,0 +1,30 @@
+Mail
+----
+
+SPF (Sender Policy Framework) 
+	DNS text entry allowing a server to send mail for a specific domain
+
+DKIM (Domain Keys Identified Mail)
+	Used to verify messages content
+	DNS entry with a public (DKIM) Key
+	
+		- Server signs message
+			(adds DKIM-Signature to Email header)
+	
+		- Receiver verifies message
+			(Checks MX server for DKIM-KEY if false message changed and failure)
+	
+
+DMARC (Domain-based Message Authentication, Reporting and Conformance)
+	Sets a policy for (Sender Policy Framework) and (Domain Keys Identified Mail)
+
+		- Receiving server checks against the policy on how to proceed
+		- Reporting Address for the domain
+
+
+(Sender Policy framework) does not work in shared hosting as they all use the same IP
+(Domain Keys Identified Mail) requires a DMARC policy
+
+
+Mail Status Codes
+-----------------
