@@ -1,6 +1,10 @@
 powershell
 ----------
 
+#powercat - netcat powershell version
+#nishang - powershell utilities
+
+
 #Powershell on linux
 #Helps with using various invoke/obscure scripts (Arch)
 git clone https://aur.archlinux.org/powershell-preview-bin.git
