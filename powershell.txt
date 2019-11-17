@@ -1,6 +1,12 @@
 powershell
 ----------
 
+#Can be executed from various locations
+Registry: poweliks, Kovter(mshta/rundll+ActiveXObject)
+File: .ps1/.vbs/.bat and scheduled task
+Macros: Word,Excel,etc.
+Remotely: PowerShell Remoting,PsExec,WMI,powershell sendkeys,.Net SendKeys
+
 #powercat - netcat powershell version
 #nishang - powershell utilities
 
