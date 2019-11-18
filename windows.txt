@@ -2,6 +2,12 @@ Windows Administration and Security
 -----------------------------------
 
 
+%windir%\System32 reserved for 64bit applications
+
+%windir%\SysWOW64 redirect for 32bit applications
+(System Windows32bit on Windows64bit)
+
+
 #RDP from Linux
 rdesktop -u Administrator -p test1test! x.x.x.x
 xfreerdp -f -u Administrator -p test1test! x.x.x.x
