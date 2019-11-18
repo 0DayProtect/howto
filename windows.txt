@@ -13,6 +13,9 @@ rdesktop -u Administrator -p test1test! x.x.x.x
 xfreerdp -f -u Administrator -p test1test! x.x.x.x
 
 
+#Check firewall settings
+C:\> netsh firewall show config
+
 
 #Disable firewall win xp
 C:\WINDOWS\system32>netsh firewall set opmode mode=DISABLE

