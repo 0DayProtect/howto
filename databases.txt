@@ -13,6 +13,11 @@ Mssql (2017 x64 RE/ubuntu/docker)
 Postgresql 12.0
 oracle 19c 
 
+
+#MSSQL 2019 is available as an Evaluation Edition
+#good for testing against database if no response
+
+
 #Connect to Microsoft SQL database
 /usr/bin/mssqlclient.py -p 1433 admin:m\@x.x.x.x
 

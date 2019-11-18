@@ -524,9 +524,10 @@ Use of uninitialized value $global_workgroup in concatenation (.) or string at /
 
 
 
-
 #Fuzz directories subdomains
 wfuzz -c -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-5000.txt --hl 0 http://FUZZ.hostname.local
+
+
 
 #Search Site source for emails
 #curl site.com > site_source
@@ -549,4 +550,3 @@ FOUND SID: XE
 FOUND SID: PLSExtProc
 FOUND SID: CLRExtProc
 FOUND SID: 
-

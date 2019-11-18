@@ -76,6 +76,7 @@ tim:$keepass$*2*6000*0*f362b5565b916422607711b54e8d0bd20838f5111d33a5eed137f9d66
 keepass2john tim.kdbx > hash
 
 
+
 #john wordlist bruteforce against KeePass hash
 john --format=KeePass --wordlist=/usr/share/wordlists/rockyou.txt hash
 

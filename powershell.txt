@@ -11,6 +11,11 @@ Remotely: PowerShell Remoting,PsExec,WMI,powershell sendkeys,.Net SendKeys
 #nishang - powershell utilities
 
 
+#Execute 32bit powershell (sysWoW64 - Windows32 on Windows64)
+C:\WIndOWs\sySwOw64\WINdOwspOweRshEll\v1.0\poWersHeLl.Exe 
+
+
+
 #Powershell on linux
 #Helps with using various invoke/obscure scripts (Arch)
 git clone https://aur.archlinux.org/powershell-preview-bin.git

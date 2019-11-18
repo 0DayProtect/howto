@@ -7,13 +7,16 @@ Veil(old)
 
 #URL encoding helps passing through post commands into sql (powershell one line or commands)
 
+
 #Powershell Encode base64 string
 [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes("'test.com'"))
 JwB0AGUAcwB0AC4AYwBvAG0AJwA=
 
+
 #Powershell Decode base64 string
 [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String('JwB0AGUAcwB0AC4AYwBvAG0AJwA='))
 'test.com'
+
 
 #Cmdline
 powershell.exe -encodedCommand JwB0AGUAcwB0AC4AYwBvAG0AJwA=
