@@ -23,6 +23,9 @@ netsh firewall set opmode mode=DISABLE
 Ok.
 
 
+#Disable Windows Defender as Administrator
+#powershell.exe Set-MpPreference -DisableRealtimemonitoring $true
+
 
 #Disable firewall 10/8/7/server 2008/Vista
 c:\windows\system32\inetsrv>netsh advfirewall set currentprofile state off

