@@ -24,8 +24,76 @@ oracle 19c
 
 
 #Connect to Microsoft SQL database
+#Change port as required
 tsql -S x.x.x.x -p 1337 -U admin
 password
+
+#Enable sysadmin user
+USE databasename
+GO
+ALTER LOGIN [sa] with password = 'test'
+go
+ALTER  LOGIN [sa] ENABLE
+go
+
+#Create user
+CREATE LOGIN test
+	with PASSWORD = 'test';
+GO
+CREATE USER test for LOGIN test;
+GO
+
+#return current system user name
+SELECT SYSTEM_USER;
+GO
+
+
+#put system user in variable
+DECLARE @sys_usr char(30);
+SET @sys_usr = SYSTEM_USER;
+SELECT 'Current system user is'+ @sys_usr;
+GO
+
+#grants control to database user(has to be created before)
+USE databasename;
+GRANT control to test;
+GO
+
+#grant exec permissions on all procedures in the database
+GRANT EXEC to test;
+GO
+
+#create systemuser from windows user account (Domain=computer name if not domained)
+#change password
+CREATE LOGIN [DOMAIN\test] FROM WINDOWS;
+GO
+ALTER SERVER ROLE [sysadmin] ADD MEMBER [DOMAIN\test]
+GO
+
+#give user account connect
+GRANT CONNECT TO [DOMAIN\test] FROM WINDOWS;
+GO
+
+
+#Dump all permissions
+EXEC sp_helpsrvrolemember 'sysadmin';
+GO
+
+#UGLY FULL DUMP permissions(scraping all of it)
+2> select  princ.name
+3> ,       princ.type_desc
+4> ,       perm.permission_name
+5> ,       perm.state_desc
+6> ,       perm.class_desc
+7> ,       object_name(perm.major_id)
+8> from    sys.database_principals princ
+go
+
+9> left join
+10>         sys.database_permissions perm
+11> on      perm.grantee_principal_id = princ.principal_id
+
+
 
 #List Database structure and tables
 1> select * from sys.tables;

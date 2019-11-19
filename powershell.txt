@@ -11,6 +11,33 @@ Remotely: PowerShell Remoting,PsExec,WMI,powershell sendkeys,.Net SendKeys
 #nishang - powershell utilities
 
 
+
+#Gets powershell policy
+get-executionpolicy
+
+
+
+Restricted
+no powershell scripts
+
+AllSigned
+Only scripts signed by trusted publisher 
+
+RemoteSigned
+Scripts downloaded from the Internet/remote network must be signed
+
+UnRestricted
+All Powershell scripts can be run
+
+
+
+(powershell one line all blocked)
+Set-ExecutionPolicy -Scope CurrentUser Unrestricted
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force
+powershell.exe -noprofile -executionpolicy bypass -file .\script.ps1
+
+
+
 #Execute 32bit powershell (sysWoW64 - Windows32 on Windows64)
 C:\WIndOWs\sySwOw64\WINdOwspOweRshEll\v1.0\poWersHeLl.Exe 
 

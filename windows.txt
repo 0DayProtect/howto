@@ -114,6 +114,14 @@ net user username userpassword /ADD
 The command completed successfully.
 
 
+#Change Windows user password
+net user username userpassowrd
+
+#change Windows user password (input)
+net user username *
+Type a password for the user:
+Retype the password to confirm:
+The command Completed Sucessfully.
 
 #Add to domain
 C:\WINDOWS\system32>net user username password /ADD /DOMAIN
