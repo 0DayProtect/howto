@@ -8,9 +8,23 @@ Veil(old)
 #URL encoding helps passing through post commands into sql (powershell one line or commands)
 
 
+
+#Encode base64 Linux
+echo test | base64
+dGVzdAo=
+
+
+
+#Decode base64 Linux
+echo "dGVzdAo=" | base64 -d
+test
+
+
+
 #Powershell Encode base64 string
 [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes("'test.com'"))
 JwB0AGUAcwB0AC4AYwBvAG0AJwA=
+
 
 
 #Powershell Decode base64 string
@@ -21,6 +35,11 @@ JwB0AGUAcwB0AC4AYwBvAG0AJwA=
 #Cmdline
 powershell.exe -encodedCommand JwB0AGUAcwB0AC4AYwBvAG0AJwA=
 test.com
+
+
+#Certutil base64 files
+certutil -encode file.exe cert.txt
+certutil -decode cert.txt file.exe
 
 
 #Powershell encode from file
