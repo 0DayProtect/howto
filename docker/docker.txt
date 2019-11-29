@@ -1,3 +1,15 @@
+Install Docker file
+------------------
+#build from docker file
+docker build - < Dockerfile
+
+#list images
+docker image ls
+
+#shell
+docker run -i -t REPOSITORY:TAG  /bin/bash
+
+
 Clean Out Docker
 ----------------
 
