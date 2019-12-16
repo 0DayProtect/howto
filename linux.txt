@@ -10,4 +10,6 @@ SQLSTATE:
 DRIVER={SQL Server};SERVER=TALLY, 1433;DATABASE=orcharddb;UID=sa;PWD=GWE3V65#6KFH93@4GWTG2G;
 
 
-
+#CentOS Openfirewall port
+firewall-cmd --zone=public --add-port=55555/tcp --permanent
+firewall-cmd --reload
